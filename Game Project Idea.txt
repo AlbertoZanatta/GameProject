@@ -1,0 +1,11 @@
+Game Idea
+The game we were thinking about developing is a take on 2D side - scrolling games which tries to mix a capture-the-flag mechanic with combat and RPG-like elements.
+More precisely, the game will entail the following mechanics:
+- The player starts from an initial position and has to capture a flag-item and take it back to the spot where he was initially spawned. To reach the 'flag' he needs to face different kind of enemies, challenges and environmental hazards.
+  The 'flag' could be 'protected' by a final-level-boss whose defeat spawns the 'flag' itself and makes it possible for the player to capture it.
+  As soon as the player gets the flag the design and the characteristics of the level change in order to make the travelling-back more interesting and challenging.
+- The player can 1) collect pickups that help him regain health
+                 2) progress faster by getting better weapons and armors by overcoming some particular challenging or spending some sort of in-game currency
+                 3) replay the levels to get better equipments and get to areas previously inaccessible.
+We are going to design three different levels with increasing difficulty - e.g. more complex layout of the level, enemies more difficult to beat or greater in the numbers, fewer pick up items to help the player survive.
+We are still discussing about the setting, but we would like to set it in a fictional viking-style world. 
