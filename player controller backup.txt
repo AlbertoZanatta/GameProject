@@ -1,0 +1,79 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    
+    public float speed = 5f; //velocità nello spostamento orizzontale
+    public float jumpTakeOffSpeed = 10f;
+    public LayerMask groundMask;
+
+    //private attributes
+    private Rigidbody2D body;
+    private SpriteRenderer spriteRenderer;
+    private bool grounded = true; //discriminate between walking/floating in air
+    private BoxCollider2D boxCollider;
+    private Animator animator;
+    private float distToGround;  // = collider.bounds.extents.y;
+
+
+    // Use this for initialization
+    void Start()
+    {
+        body = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+        distToGround = boxCollider.bounds.extents.y;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float horizontal_movement = Input.GetAxisRaw("Horizontal") * speed;
+        float vertical_movement = body.velocity.y;
+
+        grounded = IsGrounded();
+        Debug.Log("Grounded: " + grounded);
+
+        if (Input.GetButtonDown("Jump") && grounded)
+        {
+            vertical_movement = jumpTakeOffSpeed;
+        }
+        else if (Input.GetButtonUp("Jump"))
+        {
+            if (body.velocity.y > 0)
+            {
+                vertical_movement = body.velocity.y * 0.3f;
+            }
+        }
+
+        bool flipSprite = (spriteRenderer.flipX ? (horizontal_movement > 0) : (horizontal_movement < 0));
+        if (flipSprite)
+        {
+            spriteRenderer.flipX = !spriteRenderer.flipX;
+        }
+
+        Vector2 new_velocity = new Vector2(horizontal_movement, vertical_movement);
+
+        body.velocity = new_velocity;
+
+        animator.SetBool("grounded", grounded);
+        animator.SetFloat("VelocityX", Mathf.Abs(new_velocity.x));
+        animator.SetFloat("VelocityY", new_velocity.y);
+    }
+
+    bool IsGrounded()
+    {
+        //boxCollider.enabled = false;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, groundMask);
+        //boxCollider.enabled = true;
+        return hit.collider != null;
+    }
+
+    bool isAttacking()
+    {
+        return false;
+    }
