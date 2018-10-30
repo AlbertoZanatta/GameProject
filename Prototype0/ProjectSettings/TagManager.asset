@@ -8,6 +8,8 @@ TagManager:
   - Objective
   - Enemy
   - Ground
+  - Tree
+  - EnemyHead
   layers:
   - Default
   - TransparentFX

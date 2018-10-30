@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Character
 {
     
     public float speed = 5f; //velocità nello spostamento orizzontale
@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     //private attributes
     private Rigidbody2D body;
     private SpriteRenderer spriteRenderer;
-    private BoxCollider2D boxCollider;
+    private Collider2D boxCollider;
     private Animator animator;
     private float distToGround;  // = collider.bounds.extents.y;
 
@@ -31,11 +31,11 @@ public class PlayerController : MonoBehaviour
 
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
         body = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
         distToGround = boxCollider.bounds.extents.y;
     }
@@ -44,64 +44,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleInput();
-        /*
-        grounded = IsGrounded();
-
-        //Check if the player is Parrying or has stopped Parrying (Parrying influence the horizontal movement);
-        if(Input.GetButtonDown("Parry"))
-        { 
-            parry = true;
-            slowDown = 0.5f;
-            animator.speed = 0.7f;
-
-        } else if(Input.GetButtonUp("Parry"))
-        {
-            parry = false;
-            slowDown = 1f;
-            animator.speed = slowDown;
-        }
-
-        if(Input.GetButtonDown("Attack"))
-        {
-            HandleAttack();
-        }
-        float horizontal_movement = body.velocity.x;
-        float vertical_movement = body.velocity.y;
-        Debug.Log("Is attacking: " + IsAttacking() + ", velocity X: "+ horizontal_movement + ", velocity Y: " + vertical_movement);
-
-        if (!attack && !IsAttacking()) //horizontal and vertical movements are not allowed when attacking
-        {
-            //Getting the horizontal movement: Moving horizontally is not possible during an attack
-            horizontal_movement = Input.GetAxisRaw("Horizontal") * speed * slowDown;
-            vertical_movement = body.velocity.y;
-
-            //Adjusting jump information: Jumping is not possible during an attack or during parrying
-            if (Input.GetButtonDown("Jump") && grounded)
-            {
-                vertical_movement = jumpTakeOffSpeed;
-            }
-
-            else if (Input.GetButtonUp("Jump"))
-            {
-                if (body.velocity.y > 0)
-                {
-                    vertical_movement = body.velocity.y * 0.3f;
-                }
-            }
-
-            Flip(horizontal_movement);
-        }
-       
-
-        Vector2 new_velocity = new Vector2(horizontal_movement, vertical_movement);
-
-        body.velocity = new_velocity;
-
-        animator.SetBool("grounded", grounded);
-        animator.SetFloat("VelocityX", Mathf.Abs(new_velocity.x));
-        animator.SetFloat("VelocityY", new_velocity.y);
-
-        ResetVars();*/
     }
 
     private void FixedUpdate()
@@ -209,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Flip(float horizontal_movement)
+    protected override void Flip(float horizontal_movement)
     {
         bool flipSprite = (spriteRenderer.flipX ? (horizontal_movement > 0) : (horizontal_movement < 0));
         if (flipSprite)
@@ -258,6 +200,48 @@ public class PlayerController : MonoBehaviour
         parry = false;
     }
 
+
+    protected override void Attack()
+    {
+        //do somethingth
+    }
+
+    protected override void Hit(Weapon weapon)
+    {
+        int physicalDamage = weapon.physical;
+        healthPoints -= physicalDamage;
+        //characterAnimator.SetTrigger("Hit");
+        if(healthPoints <= 0)
+        {
+            Die();
+        }
+    }
+
+    protected override void Move()
+    {
+        //do something
+    }
+
+    protected override void Die()
+    {
+        //characterAnimator.SetBool("Dead", true);
+        Debug.Log("Player is dead");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("EnemyHead"))
+        {
+            healthPoints -= 1;
+            //characterAnimator.SetTrigger("Hit");
+            Debug.Log("Player hits enemy head");
+            Vector2 direction = facingRight ? Vector2.left : Vector2.right;
+            body.AddForce(direction * 20);
+        }
+    }
+
+
+    //Immunity after being hit
 
 
 }
