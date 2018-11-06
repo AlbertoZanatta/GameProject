@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - Tree
   - EnemyHead
+  - Nexus
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 
