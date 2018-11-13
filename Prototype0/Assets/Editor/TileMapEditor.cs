@@ -253,6 +253,7 @@ public class TileMapEditor : Editor {
                 tileRef.AddComponent<BoxCollider2D>();
                 BoxCollider2D box = tileRef.GetComponent<BoxCollider2D>();
                 box.size = tileDims;
+                box.sharedMaterial = Resources.Load<PhysicsMaterial2D>("NoFriction");
             }
 
         }

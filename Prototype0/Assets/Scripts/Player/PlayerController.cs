@@ -26,6 +26,7 @@ public class PlayerController : Character, Damageable
     public OSCTransmitter transmitter; //For playing sounds
     public Inventory inventory; //Reference to the inventory system
     public Parry parryManager;
+    public event System.EventHandler<CollectedCoinArgs> coinsCollected;
 
     //Vertical movement speed
     public float jumpTakeOffSpeed = 10f;
@@ -213,5 +214,17 @@ public class PlayerController : Character, Damageable
             return;
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Coin")
+        {
+            Debug.Log("CoinCollected");
+            if(coinsCollected != null)
+            {
+                coinsCollected(this, new CollectedCoinArgs());
+            }
+        }
     }
 }

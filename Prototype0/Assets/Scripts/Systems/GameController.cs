@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
+
+    public Text scoreText;
 
     public bool hasFlag = false;
     public bool facingRight = true;
     int killedEnemies = 0;
+    int score;
     float elapsedTime = 0;
 
     public static GameController instance;
@@ -27,10 +31,17 @@ public class GameController : MonoBehaviour {
     void Start ()
     {
         Time.timeScale = 1f;
+        PlayerController.Instance.coinsCollected += Instance_coinsCollected;
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    private void Instance_coinsCollected(object sender, CollectedCoinArgs e)
+    {
+        score += 10;
+        scoreText.text = score.ToString();
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         elapsedTime += Time.deltaTime;
 	}
