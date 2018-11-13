@@ -12,6 +12,7 @@ TagManager:
   - EnemyHead
   - Nexus
   - Edge
+  - Coin
   layers:
   - Default
   - TransparentFX
