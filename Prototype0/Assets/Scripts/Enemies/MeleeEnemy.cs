@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeEnemy : Enemy, Damageable {
-
-    
     public LayerMask playerMask;
     
     private Weapon weapon;
@@ -14,13 +12,7 @@ public class MeleeEnemy : Enemy, Damageable {
     // Use this for initialization
     protected override void Start () {
         base.Start();
-
-        stopAttackRange = 0.8f;
-        attackRange = 4f;
-        detectRange = 5f;
-        movementSpeed = 3f;
         weapon = new Weapon(2, 0, Weapon.WeaponType.Axe);
-        healthPoints = 3;
 	}
 	
 	// Update is called once per frame
@@ -28,7 +20,7 @@ public class MeleeEnemy : Enemy, Damageable {
         Move();
 	}
 
-    protected override void Attack()
+    public override void Attack()
     {
         Vector3 attackDirection = facingRight ? new Vector3(1, 0, 0) : new Vector3(-1, 0, 0);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, attackRange, playerMask);
@@ -45,7 +37,7 @@ public class MeleeEnemy : Enemy, Damageable {
         }
     }
 
-    protected override void Move()
+    public override void Move()
     {
         float distance = Vector2.Distance(transform.position, target.position);
         if(distance <= stopAttackRange)
@@ -90,17 +82,7 @@ public class MeleeEnemy : Enemy, Damageable {
     public override void Hit(Weapon weapon)
     {
         int physicalDamage = weapon.physical;
-        healthPoints -= physicalDamage;
+        health.ChangeHealth(-physicalDamage);
         StartCoroutine(HitFlashing(1f, 0.1f));
-        if (healthPoints <= 0)
-        {
-            Die();
-        }
-    }
-
-    protected override void Die()
-    {
-        //Destroys the object after 2 seconds
-        Destroy(gameObject, 2f);
     }
 }

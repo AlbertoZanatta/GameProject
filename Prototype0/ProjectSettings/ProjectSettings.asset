@@ -537,7 +537,18 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 1
   webGLLinkerTarget: 1
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: EXTOSC
+    4: EXTOSC
+    7: EXTOSC
+    13: EXTOSC
+    18: EXTOSC
+    19: EXTOSC
+    21: EXTOSC
+    23: EXTOSC
+    25: EXTOSC
+    26: EXTOSC
+    27: EXTOSC
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

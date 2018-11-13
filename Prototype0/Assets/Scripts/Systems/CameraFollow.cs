@@ -26,13 +26,18 @@ public class CameraFollow : MonoBehaviour {
     void Start () {
         t = player.transform;
         rightOffset =  transform.position - t.position;
+        transform.position = t.transform.position + rightOffset;
+        //rightOffset = new Vector3(rightOffset.x, 0, rightOffset.z);
         leftOffset = new Vector3(-rightOffset.x, rightOffset.y, rightOffset.z);
+        //leftOffset = new Vector3(leftOffset.x, 0, leftOffset.z);
         facingRight = GameController.instance.facingRight;
     }
 	
 	// Update is called once per frame
 	void LateUpdate () {
+        //Camera follows up the player when he is about to exit the field of view
         Vector3 desiredPosition = GameController.instance.facingRight ? t.transform.position + rightOffset :t.transform.position + leftOffset;
+        desiredPosition = new Vector3(desiredPosition.x, transform.position.y, desiredPosition.z);
         if(facingRight != GameController.instance.facingRight)
         {
             facingRight = GameController.instance.facingRight;
@@ -50,7 +55,7 @@ public class CameraFollow : MonoBehaviour {
         }
         if (transform.position.x < -5)
         {
-            transform.position = new Vector3(0f, transform.position.y, transform.position.z);
+            //transform.position = new Vector3(0f, transform.position.y, transform.position.z);
         }
 	}
 }

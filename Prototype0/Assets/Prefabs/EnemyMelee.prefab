@@ -63,6 +63,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1684851244278564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4351883973383442}
+  - component: {fileID: 114097703325881428}
+  m_Layer: 9
+  m_Name: Health
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1927023904975358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4715931783308360}
+  - component: {fileID: 114669062424627334}
+  m_Layer: 0
+  m_Name: Loot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4351883973383442
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1684851244278564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4989012188706268}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4530414038630056
 Transform:
   m_ObjectHideFlags: 1
@@ -89,6 +134,19 @@ Transform:
   m_Father: {fileID: 4989012188706268}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4715931783308360
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927023904975358}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.8864498, y: 6.9116797, z: 0.0034242254}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4989012188706268}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4989012188706268
 Transform:
   m_ObjectHideFlags: 1
@@ -96,11 +154,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1594064275918684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.514, y: -0.28549105, z: 0}
+  m_LocalPosition: {x: 12.65, y: -0.28549105, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4530414038630056}
   - {fileID: 4562049732482150}
+  - {fileID: 4715931783308360}
+  - {fileID: 4351883973383442}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -188,6 +248,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce7ac98297b3fb44ac99db86a664afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114097703325881428
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1684851244278564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24976cf1d67caa544ab0df94182f62b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 3
+  healthPoints: 3
 --- !u!114 &114318859798970588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,15 +272,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab87836d0a0a9d4397e0a4ceef79687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 114097703325881428}
   target: {fileID: 0}
-  detectRange: 0
-  stopAttackRange: 0
+  lootDrop: {fileID: 114669062424627334}
+  detectRange: 5
+  stopAttackRange: 1
   attackRange: 1.1
-  movementSpeed: 0
+  movementSpeed: 3
   playerMask:
     serializedVersion: 2
     m_Bits: 1024
-  attackRange: 1.1
+--- !u!114 &114669062424627334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927023904975358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80ed75305289124facd534693d85d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootObjects:
+  - dropPrefab: {fileID: 1444061045762784, guid: 0ef2d16bba22e1c49b5436b2a082abda,
+      type: 2}
+    dropOdds: 0.5
+  - dropPrefab: {fileID: 1444061045762784, guid: 0ef2d16bba22e1c49b5436b2a082abda,
+      type: 2}
+    dropOdds: 0.1
 --- !u!212 &212163872960714240
 SpriteRenderer:
   m_ObjectHideFlags: 1

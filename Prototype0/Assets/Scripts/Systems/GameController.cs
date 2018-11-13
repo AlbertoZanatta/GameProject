@@ -33,7 +33,6 @@ public class GameController : MonoBehaviour {
 	void Update ()
     {
         elapsedTime += Time.deltaTime;
-        Debug.Log("Timescale: " + Time.timeScale);
 	}
 
     public void FinishLevel()

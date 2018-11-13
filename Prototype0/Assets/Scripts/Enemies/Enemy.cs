@@ -5,12 +5,14 @@ using UnityEngine;
 public abstract class Enemy : Character {
 
     public Transform target;
-    public Item[] loot;
+    public LootDrop lootDrop;
 
     [SerializeField] protected float detectRange;
     [SerializeField] protected float stopAttackRange;
     [SerializeField] protected float attackRange;
     [SerializeField] protected float movementSpeed;
+
+    private IEnemyState currentState; //Current state in the Enemy's state machine
 
 	// Use this for initialization
 	protected override void Start () {
@@ -24,7 +26,7 @@ public abstract class Enemy : Character {
 		
 	}
 
-    protected override void Flip(float horizontal_movement)
+    public override void Flip(float horizontal_movement)
     {
         if(horizontal_movement != 0)
         {
@@ -36,5 +38,16 @@ public abstract class Enemy : Character {
                 
             }
         }    
+    }
+
+    public override void Die()
+    {
+        DropLoot();
+        Destroy(gameObject);
+    }
+
+    protected virtual void DropLoot()
+    {
+        lootDrop.Drop(transform.position);
     }
 }

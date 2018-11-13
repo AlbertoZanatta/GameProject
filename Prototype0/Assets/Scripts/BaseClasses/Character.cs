@@ -4,14 +4,18 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour {
 
-    protected int healthPoints;
+    [SerializeField] protected Health health;
+    public float movementSpeed = 5f;
+
     protected bool facingRight = false;
 
     //references to some components
-    protected Collider2D characterCollider;
-    protected Rigidbody2D characterRigidbody;
-    protected Animator characterAnimator;
-    protected SpriteRenderer characterRenderer;
+    public Collider2D characterCollider;
+    public Rigidbody2D characterRigidbody;
+    public Animator characterAnimator;
+    //public property for accessing the animator
+    public Animator CharacterAnimator { get{ return characterAnimator; } }
+    public SpriteRenderer characterRenderer;
 
 	// Use this for initialization
 	virtual protected void Start () {
@@ -19,12 +23,18 @@ public abstract class Character : MonoBehaviour {
         characterRigidbody = GetComponent<Rigidbody2D>();
         characterAnimator = GetComponent<Animator>();
         characterRenderer = GetComponent<SpriteRenderer>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
+        health.healthDepleted += Health_healthDepleted;
+    }
 
+    private void Health_healthDepleted(object sender, HealthEventArgs e)
+    {
+        Die();
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        
 	}
 
     protected virtual IEnumerator HitFlashing(float time, float frequency)
@@ -44,14 +54,41 @@ public abstract class Character : MonoBehaviour {
     }
 
     //Methods to implement
-    protected abstract void Move();
-    protected abstract void Attack();
-    protected abstract void Die();
-    protected abstract void Flip(float horizontal_movement);
-
+    public abstract void Move();
+    public abstract void Attack();
+    public abstract void Die();
+    public abstract void Flip(float horizontal_movement);
 
 
     public abstract void Hit(Weapon weapon);
+
+    public Health Health
+    {
+        get { return health; }
+    }
+
+    public virtual void Throw(GameObject throwablePrefab)
+    {
+        if (facingRight)
+        {
+            GameObject tmp = (GameObject)Instantiate(throwablePrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, -45)));
+            ThrowableKnife script = tmp.GetComponent<ThrowableKnife>();
+            if (script != null)
+            {
+                script.Initialize(Vector2.right);
+            }
+
+        }
+        else
+        {
+            GameObject tmp = (GameObject)Instantiate(throwablePrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, -45)));
+            ThrowableKnife script = tmp.GetComponent<ThrowableKnife>();
+            if (script != null)
+            {
+                script.Initialize(Vector2.left);
+            }
+        }
+    }
 
 
 }

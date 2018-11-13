@@ -3,39 +3,62 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using extOSC;
 
 public class PlayerController : Character, Damageable
 {
-    
-    public float speed = 5f; //velocità nello spostamento orizzontale
+    //Singleton patter for acessing the player instance
+    private static PlayerController instance;
+
+    public static PlayerController Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = GameObject.FindObjectOfType<PlayerController>();
+            }
+            return instance;
+        }
+    }
+
+    //Public components' references
+    public OSCTransmitter transmitter; //For playing sounds
+    public Inventory inventory; //Reference to the inventory system
+    public Parry parryManager;
+
+    //Vertical movement speed
     public float jumpTakeOffSpeed = 10f;
-    public float dodgeSpeed = 5f;
-    public LayerMask groundMask;
-    public float slowDown = 1f; //slow down coefficient due to parrying
 
-    //private attributes
-    private float distToGround;  // = collider.bounds.extents.y;
+    //Public properties (capital letters distinguish properties from normal variables)
+    public bool DoAttack { get; set; }
 
-    //Health system UI
-    public Slider healthSlider;
+    public bool StartJump { get; set; }
 
-    //private boolean fields to control animations
-    private bool grounded = true; //discriminate between walking/floating in air
-    private bool start_parry = false;
-    private bool stop_parry = false;
-    private bool attack = false;
-    private bool start_jump = false;
-    private bool stop_jump = false;
+    public bool StopJump { get; set; }
+
+    public bool Parry { get; set; }
+
+    public bool OnGround { get; set; }
+
+    public bool CanParry { get; set; }
+
+    //Detecting ground
+    public LayerMask groundMask; //for detecting ground in function IsGrounded()
+    private float distToGround;  //fordetecting ground too
+
+    //private boolean to control player 'invincibility' moments
     private bool canBeHit = true;
-    private bool canParry = true;
-
 
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
+
+        CanParry = true;
+
         distToGround = characterCollider.bounds.extents.y;
-        healthPoints = 10;
+        inventory.itemUsed += Inventory_itemUsed;
     }
 
     // Update is called once per frame
@@ -48,52 +71,48 @@ public class PlayerController : Character, Damageable
     {
         if (Input.GetButtonDown("Attack"))
         {
-            attack = true;
-
+            characterAnimator.SetTrigger("Attack");
         }
         else if (Input.GetButtonDown("Jump"))
         {
-            start_jump = true;
-
+            StartJump = true;
         }
         else if (Input.GetButtonUp("Jump"))
         {
-            stop_jump = true;
-
+            StopJump = true;
         }
         else if (Input.GetButtonDown("Parry"))
         {
-            start_parry = true;
-
+            if(CanParry)
+            {
+                characterAnimator.SetBool("Parry", true);
+            }
+           
         }
         else if (Input.GetButtonUp("Parry"))
         {
-            stop_parry = true;
+            characterAnimator.SetBool("Parry", false);
         }
+    }
+
+    public override void Attack()
+    {
+        throw new System.NotImplementedException();
     }
 
     private void FixedUpdate()
     {
-        Move();
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        OnGround = IsGrounded();
+        CharacterAnimator.SetBool("grounded", OnGround);
+        HandleMovement(horizontal);
+        Flip(horizontal);
+        //HandleLayers 
     }
 
-    protected override void Move()
+    public override void Move()
     {
-        float horizontal_movement = Input.GetAxisRaw("Horizontal") * speed * slowDown;
 
-        grounded = IsGrounded();
-
-        characterAnimator.SetBool("grounded", grounded);
-
-        HandleMovement(horizontal_movement); //Handles horizontal movement and Jump
-
-        Flip(horizontal_movement);
-
-        HandleAttacks();
-
-        HandleParry();
-
-        ResetValues();
     }
 
     bool IsGrounded()
@@ -102,36 +121,34 @@ public class PlayerController : Character, Damageable
         return hit.collider != null;
     }
 
-    void HandleMovement(float horizontal_movement)
+    void HandleMovement(float horizontal)
     {
-        if(!IsAttacking() && !IsParrying())
+        if(characterRigidbody.velocity.y < 0)
         {
-             characterRigidbody.velocity = new Vector2(horizontal_movement, characterRigidbody.velocity.y);
-             
+            characterAnimator.SetBool("land", true);
+        }
+        if(!DoAttack)
+        {
+            characterRigidbody.velocity = new Vector2(horizontal * movementSpeed, characterRigidbody.velocity.y);
 
-            float vertical_movement = characterRigidbody.velocity.y;
-
-            if (grounded && start_jump)
+            if (StartJump && OnGround && !Parry)
             {
-                vertical_movement = jumpTakeOffSpeed;
-            }
-            else if (stop_jump)
-            {
-                if (characterRigidbody.velocity.y > 0)
-                {
-                    vertical_movement = characterRigidbody.velocity.y * 0.3f;
-                }
+                characterRigidbody.velocity = new Vector2(characterRigidbody.velocity.x, jumpTakeOffSpeed);
+                StartJump = false;
             }
 
-            characterRigidbody.velocity = new Vector2(horizontal_movement, vertical_movement);
-
-            characterAnimator.SetFloat("VelocityX", Mathf.Abs(horizontal_movement));
-            characterAnimator.SetFloat("VelocityY", vertical_movement);
+            if(StopJump && characterRigidbody.velocity.y > 0)
+            {
+                characterRigidbody.velocity = new Vector2(characterRigidbody.velocity.x, characterRigidbody.velocity.y * 0.3f);
+                StopJump = false;
+            }
         }
 
+        characterAnimator.SetFloat("VelocityX", Mathf.Abs(characterRigidbody.velocity.x));
+        characterAnimator.SetFloat("VelocityY", characterRigidbody.velocity.y);
     }
 
-    protected override void Flip(float horizontal_movement)
+    public override void Flip(float horizontal_movement)
     {
         bool flipSprite = (transform.localScale.x < 0 ? (horizontal_movement > 0) : (horizontal_movement < 0));
         if (flipSprite)
@@ -142,80 +159,16 @@ public class PlayerController : Character, Damageable
         }
     }
 
-    void HandleAttacks()
-    {
-        if(grounded && attack && !IsAttacking())
-        {
-            Attack();   
-        }
-    }
-
-    bool IsAttacking()
-    {
-        return characterAnimator.GetCurrentAnimatorStateInfo(0).IsTag("attack_animation");
-    }
-
-    protected override void Attack()
-    {
-        characterAnimator.SetTrigger("Attack");
-        characterRigidbody.velocity = Vector2.zero;
-        stop_parry = true;
-    }
-
-    private void HandleParry()
-    {
-        if(start_parry && canParry)
-        {
-            characterAnimator.SetBool("Parry", true);
-            StartCoroutine("RechargeParry");
-        }else if (stop_parry)
-        {
-            characterAnimator.SetBool("Parry", false);
-        }
-
-    }
-
-    bool IsParrying()
-    {
-        return characterAnimator.GetCurrentAnimatorStateInfo(0).IsTag("parry_animation");
-    }
-
-    private IEnumerator RechargeParry()
-    {
-        canParry = false;
-        yield return new WaitForSeconds(1.5f);
-        canParry = true;
-    }
-
-    void ResetValues()
-    {
-        attack = false;
-        start_jump = false;
-        stop_jump = false;
-        start_parry = false;
-        stop_parry = false;
-    }
-
-    void StopParry()
-    {
-        start_parry = false;
-    }
-
     public override void Hit(Weapon weapon)
     {
-        if(canBeHit && !IsParrying())
+        if(canBeHit)
         {
             int damage = weapon.physical + weapon.magical; //possibly a more complex function
 
             if(damage > 0)
             {
-                healthPoints -= damage;
-                healthSlider.value = healthPoints < 0 ? 0 : healthPoints;
+                health.ChangeHealth(-damage);
                 StartCoroutine(HitFlashing(0.6f, 0.1f));
-                if (healthPoints <= 0)
-                {
-                    Die();
-                }
             }  
         }  
     }
@@ -238,25 +191,27 @@ public class PlayerController : Character, Damageable
         canBeHit = true;
     }
 
-    protected override void Die()
+    public override void Die()
     {
-        //characterAnimator.SetBool("Dead", true);
-        //Debug.Log("Player is dead");
+        
+    }
+
+    private void Inventory_itemUsed(object sender, InventoryEventArgs e)
+    {
+        e.item.OnUse(this);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("EnemyHead"))
+        GameObject colliding = collision.gameObject;
+
+        //Checking if it's a collectable item
+        IInventoryItem item = colliding.GetComponent<IInventoryItem>();
+        if (item != null)
         {
-            healthPoints -= 1;
-            //characterAnimator.SetTrigger("Hit");
-            Debug.Log("Player hits enemy head");
-            Vector2 direction = facingRight ? Vector2.left : Vector2.right;
-            characterRigidbody.AddForce(direction * 20);
+            inventory.AddItem(item);
+            return;
         }
+
     }
-
-    //Immunity after being hit
-
-
 }

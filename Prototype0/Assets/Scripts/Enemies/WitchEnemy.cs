@@ -8,17 +8,13 @@ public class WitchEnemy : Enemy, Damageable
 
     public float attackDelay = 2f;
     public GameObject projectile;
+
     private float timeBetweenAttacks = 0f;
     // Use this for initialization
 
     protected override void Start()
     {
         base.Start();
-
-        attackRange = 10f;
-        detectRange = 15f;
-        movementSpeed = 0.5f;
-        healthPoints = 5;
     }
 
     // Update is called once per frame
@@ -33,7 +29,7 @@ public class WitchEnemy : Enemy, Damageable
             Attack();
     }
 
-    protected override void Attack()
+    public override void Attack()
     {
         if (characterAnimator.GetBool("FireBallAttack") == true)
         {
@@ -63,7 +59,7 @@ public class WitchEnemy : Enemy, Damageable
     }
 
 
-    protected override void Move()
+    public override void Move()
     {
         float distance = Vector2.Distance(transform.position, target.position);
         if (distance <= attackRange)
@@ -95,18 +91,12 @@ public class WitchEnemy : Enemy, Damageable
 
         if (damage > 0)
         {
-            healthPoints -= damage;
+            health.ChangeHealth(-damage);
             StartCoroutine(HitFlashing(0.6f, 0.1f));
-            if (healthPoints <= 0)
-            {
-                Die();
-            }
         }
-
-        Debug.Log("Enemy being hit");
     }
 
-    protected override void Die()
+    public override void Die()
     {
         Destroy(gameObject);
     }
@@ -116,6 +106,5 @@ public class WitchEnemy : Enemy, Damageable
         canMove = false;
         yield return new WaitForSeconds(1.7f);
         canMove = true;
-
     }
 }

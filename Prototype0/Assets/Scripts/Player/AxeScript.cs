@@ -5,11 +5,10 @@ using UnityEngine;
 public class AxeScript : MonoBehaviour {
 
     public Weapon weapon = new Weapon(1, 0, Weapon.WeaponType.Axe);
-
-    private void OnCollisionEnter2D(Collision2D collision)
+ 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject hit = collision.gameObject;
-        Debug.Log("Axe hit something! ");
 
         Damageable damageable = hit.GetComponent<Damageable>();
         if(damageable != null)

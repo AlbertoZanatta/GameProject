@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour, Damageable {
 
-    public Damageable holder;
+    public Character holder;
     [SerializeField] int magicDefense;
     [SerializeField] int physicalDefense;
     [SerializeField] int healthPoints;
@@ -18,7 +18,7 @@ public class Shield : MonoBehaviour, Damageable {
 
     public void Hit(Weapon weapon)
     {
-        int damage = physicalDefense - weapon.physical;
+        int damage = weapon.physical - physicalDefense;
         if(damage > 0)
         {
             weapon.physical = damage;

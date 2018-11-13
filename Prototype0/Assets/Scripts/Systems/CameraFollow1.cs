@@ -34,14 +34,11 @@ public class CameraFollow1 : MonoBehaviour {
         float halfHeight = cam.orthographicSize;
         halfWidth = halfHeight * cam.aspect;
         leftBorder = transform.position.x - halfWidth;
-
-        Debug.Log("Half width: " + halfWidth);
-        Debug.Log("Left border: " + leftBorder);
     }
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        Vector3 desiredPosition = true ? t.transform.position + leftOffset :t.transform.position + rightOffset;
+        Vector3 desiredPosition = !GameController.instance.facingRight ? t.transform.position + leftOffset :t.transform.position + rightOffset;
         if(left != true)
         {
             left = true;
@@ -59,7 +56,7 @@ public class CameraFollow1 : MonoBehaviour {
         }
         if (transform.position.x  < 0)
         {
-            transform.position = new Vector3(0f, transform.position.y, transform.position.z);
+            //transform.position = new Vector3(0f, transform.position.y, transform.position.z);
         }
 	}
 }

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 [CreateAssetMenu()]
-public class ScriptableInventoryItem : ScriptableObject
+public abstract class ScriptableInventoryItem : ScriptableObject
 {
 
     public string itemName;
     public Sprite image;
     public bool stackable;
+    public string ID; //each inventory item has a unique id;
+
 
 }
