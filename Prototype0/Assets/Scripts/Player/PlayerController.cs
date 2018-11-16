@@ -44,6 +44,7 @@ public class PlayerController : Character, Damageable
 
     public bool CanParry { get; set; }
 
+
     //Detecting ground
     public LayerMask groundMask; //for detecting ground in function IsGrounded()
     private float distToGround;  //fordetecting ground too
@@ -60,6 +61,7 @@ public class PlayerController : Character, Damageable
 
         distToGround = characterCollider.bounds.extents.y;
         inventory.itemUsed += Inventory_itemUsed;
+
     }
 
     // Update is called once per frame

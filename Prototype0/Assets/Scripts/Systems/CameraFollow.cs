@@ -12,9 +12,11 @@ public class CameraFollow : MonoBehaviour {
     private Transform t;
     private Vector3 rightOffset;
     private Vector3 leftOffset;
+
     private Vector3 velocity = Vector3.zero;
     private bool facingRight= true;
     private float changeTime;
+    private bool smooth = false;
 
 
     private void Awake()
@@ -31,14 +33,26 @@ public class CameraFollow : MonoBehaviour {
         leftOffset = new Vector3(-rightOffset.x, rightOffset.y, rightOffset.z);
         //leftOffset = new Vector3(leftOffset.x, 0, leftOffset.z);
         facingRight = GameController.instance.facingRight;
+        Debug.Log("Right offset: " + rightOffset);
+        Debug.Log("Left offset: " + leftOffset);
     }
 	
 	// Update is called once per frame
 	void LateUpdate () {
         //Camera follows up the player when he is about to exit the field of view
         Vector3 desiredPosition = GameController.instance.facingRight ? t.transform.position + rightOffset :t.transform.position + leftOffset;
-        desiredPosition = new Vector3(desiredPosition.x, transform.position.y, desiredPosition.z);
-        if(facingRight != GameController.instance.facingRight)
+        Vector3 currentOffset = transform.position - t.position;
+        
+        if(currentOffset.y <= rightOffset.y && currentOffset.y >= -3f)
+        {
+            desiredPosition = new Vector3(desiredPosition.x, transform.position.y, desiredPosition.z);
+        }
+        else 
+        {
+            desiredPosition = new Vector3(desiredPosition.x, desiredPosition.y, desiredPosition.z);
+        }
+        
+        if (facingRight != GameController.instance.facingRight)
         {
             facingRight = GameController.instance.facingRight;
             changeTime = Time.time;

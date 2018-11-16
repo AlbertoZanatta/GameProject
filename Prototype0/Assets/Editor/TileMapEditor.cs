@@ -8,12 +8,14 @@ using UnityEditor;
 public class TileMapEditor : Editor {
 
     public TileMap map;
-    int choice = 0;
-    private Vector2 tileDims;
 
     TileBrush tileBrush;
 
     Vector3 mouseHitPosition;
+
+    //Utility variables
+    int choice = 0;
+    private Vector2 tileDims;
 
     bool MouseOnMap
     {
@@ -22,13 +24,13 @@ public class TileMapEditor : Editor {
               mouseHitPosition.y > -map.gridDimensions.y;
         }
     }
-    
+
     public override void OnInspectorGUI()
     {
         EditorGUILayout.BeginVertical();
 
         var previousDimensions = map.mapDimensions;
-       
+
         map.mapDimensions = EditorGUILayout.Vector2Field("Map Dimensions: " , map.mapDimensions);
 
         if(previousDimensions != map.mapDimensions)
@@ -140,7 +142,7 @@ public class TileMapEditor : Editor {
         map.tileDimensions = new Vector2(width, height);
 
         map.convertPixelsToUnits = (int)(sprite.rect.width / sprite.bounds.size.x);
-        map.convertPixelsToUnits = sprite.rect.width % sprite.bounds.size.x >= 0.5 ? map.convertPixelsToUnits + 1 : map.convertPixelsToUnits;
+
         tileDims = new Vector2((width / map.convertPixelsToUnits), (height / map.convertPixelsToUnits));
 
         map.gridDimensions = new Vector2((width / map.convertPixelsToUnits) * map.mapDimensions.x, (height / map.convertPixelsToUnits) * map.mapDimensions.y);
@@ -246,7 +248,8 @@ public class TileMapEditor : Editor {
             tileRef.transform.SetParent(map.tiles.transform);
             tileRef.transform.position = new Vector3(posX, posY, 0);
             tileRef.AddComponent<SpriteRenderer>();
-            if(choice == 0)//We want to add ground
+
+            if (choice == 0)//We want to add ground
             {
                 tileRef.tag = "Ground";
                 tileRef.layer = LayerMask.NameToLayer("Ground");

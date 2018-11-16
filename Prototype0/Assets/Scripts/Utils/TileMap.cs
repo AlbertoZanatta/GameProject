@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TileMap : MonoBehaviour {
 
-    public Vector2 mapDimensions = new Vector2(30, 15);
+    public Vector2 mapDimensions = new Vector2(300, 30);
     public Texture2D texture2D;
     public Vector2 tileDimensions = new Vector2();
     public Vector2 tilePadding = new Vector2();
