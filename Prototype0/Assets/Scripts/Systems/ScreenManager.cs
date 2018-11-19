@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,6 +50,17 @@ public class ScreenManager : MonoBehaviour {
         }
     }
 
+    internal void InitWindows()
+    {
+        foreach (BaseClassScreen screen in screens)
+        {
+            screen.CloseWindow();
+        }
+
+        screens[0].OpenWindow();
+        screens[2].OpenWindow();
+    }
+
     public BaseClassScreen Open(int value)
     {
         if(value < 0 || value >= screens.Length)
@@ -65,7 +77,6 @@ public class ScreenManager : MonoBehaviour {
     private void Start()
     {
         BaseClassScreen.manager = this;
-        Open(defaultScreen);
     }
 
     public void CloseAll()
@@ -78,7 +89,11 @@ public class ScreenManager : MonoBehaviour {
 
     public void ShowGameOver()
     {
-        screens[0].CloseWindow();
-        screens[1].OpenWindow();
+        foreach( BaseClassScreen screen in screens)
+        {
+            screen.CloseWindow();
+        }
+
+        screens[3].OpenWindow();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
@@ -32,7 +33,14 @@ public class GameController : MonoBehaviour {
     {
         Time.timeScale = 1f;
         PlayerController.Instance.coinsCollected += Instance_coinsCollected;
+        PlayerController.Instance.playerDead += Instance_playerDead;
+        ScreenManager.instance.InitWindows();
 	}
+
+    private void Instance_playerDead(object sender, PlayerDeadArgs e)
+    {
+        ScreenManager.instance.ShowGameOver();
+    }
 
     private void Instance_coinsCollected(object sender, CollectedCoinArgs e)
     {
@@ -50,6 +58,13 @@ public class GameController : MonoBehaviour {
     {
         Debug.Log("Level finished");
         Time.timeScale = 1;
-        ScreenManager.instance.ShowGameOver();
+       
+    }
+
+    public void RestartLevel()
+    {
+        Scene loadedLevel = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(loadedLevel.buildIndex);
     }
 }
+

@@ -27,6 +27,7 @@ public class PlayerController : Character, Damageable
     public Inventory inventory; //Reference to the inventory system
     public Parry parryManager;
     public event System.EventHandler<CollectedCoinArgs> coinsCollected;
+    public event System.EventHandler<PlayerDeadArgs> playerDead;
 
     //Vertical movement speed
     public float jumpTakeOffSpeed = 10f;
@@ -196,7 +197,10 @@ public class PlayerController : Character, Damageable
 
     public override void Die()
     {
-        
+        if(playerDead != null)
+        {
+            playerDead(this, new PlayerDeadArgs());
+        }
     }
 
     private void Inventory_itemUsed(object sender, InventoryEventArgs e)
@@ -229,4 +233,9 @@ public class PlayerController : Character, Damageable
             }
         }
     }
+}
+
+public class PlayerDeadArgs : System.EventArgs
+{
+
 }

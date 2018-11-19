@@ -75,6 +75,7 @@ public abstract class EnemyState : Character, Damageable {
     {
         Vector2 direction = GetDirection();
         characterRigidbody.velocity = new Vector2(GetDirection().x * movementSpeed, characterRigidbody.velocity.y);
+        Debug.Log("velocity: " + characterRigidbody.velocity);
         characterAnimator.SetFloat("VelocityX", Mathf.Abs(characterRigidbody.velocity.x));
         characterAnimator.SetFloat("VelocityY", characterRigidbody.velocity.y);
     }
@@ -102,7 +103,7 @@ public abstract class EnemyState : Character, Damageable {
     public void ChangeDirection()
     {
         facingRight = !facingRight;
-        transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, 1);
     }
 
     public Vector2 GetDirection()
@@ -117,7 +118,7 @@ public abstract class EnemyState : Character, Damageable {
 
     public override void Die()
     {
-        
+        Destroy(gameObject);  
     }
 
     public override void Hit(Weapon weapon)

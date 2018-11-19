@@ -130,6 +130,16 @@ public class Inventory : MonoBehaviour {
         }
         return null;
     }
+
+    public bool HasItem(string item)
+    {
+        foreach (ItemStack iStack in mItems)
+        {
+            if (iStack.Item.itemName.Equals(item))
+                return true;
+        }
+        return false;
+    }
 }
 
 public class InventoryStackEventArgs : EventArgs

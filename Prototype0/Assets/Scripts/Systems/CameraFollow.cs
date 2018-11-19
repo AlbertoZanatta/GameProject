@@ -18,11 +18,23 @@ public class CameraFollow : MonoBehaviour {
     private float changeTime;
     private bool smooth = false;
 
-
-    private void Awake()
+    //Set this bool to true when the player is jumping so that the camera doesn't continuously follow him
+    public bool FollowPlayer { get; set; }
+    public static CameraFollow instance;
+    void Awake()
     {
-        var cam = GetComponent<Camera>();
-       // cam.orthographicSize = (Screen.height / 2f) / scale;
+        //Check if instance already exists
+        if (instance == null)
+        {
+            //if not, set instance to this
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            // Then destroy this.This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            Destroy(gameObject);
+        }
+
     }
     // Use this for initialization
     void Start () {
@@ -43,7 +55,7 @@ public class CameraFollow : MonoBehaviour {
         Vector3 desiredPosition = GameController.instance.facingRight ? t.transform.position + rightOffset :t.transform.position + leftOffset;
         Vector3 currentOffset = transform.position - t.position;
         
-        if(currentOffset.y <= rightOffset.y && currentOffset.y >= -3f)
+        if(currentOffset.y <= rightOffset.y)
         {
             desiredPosition = new Vector3(desiredPosition.x, transform.position.y, desiredPosition.z);
         }
