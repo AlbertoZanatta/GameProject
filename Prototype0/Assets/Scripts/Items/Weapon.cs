@@ -9,7 +9,8 @@ public class Weapon{
         Axe, 
         Trap,
         Fireball,
-        Head
+        Head, 
+        Knife
     }
 
     public int magical;

@@ -10,6 +10,8 @@ public class ThrowableKnife : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Vector2 direction;
 
+    Weapon weapon = new Weapon(1, 0, Weapon.WeaponType.Knife);
+
 
 	// Use this for initialization
 	void Start ()
@@ -35,5 +37,17 @@ public class ThrowableKnife : MonoBehaviour
     public void Initialize(Vector2 direction)
     {
         this.direction = direction;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag != "Enemy")
+        {
+            Damageable damageable = collision.gameObject.GetComponent<Damageable>();
+            if(damageable != null)
+            {
+                damageable.Hit(weapon);
+            }
+        }
     }
 }

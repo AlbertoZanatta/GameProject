@@ -168,18 +168,30 @@ public class PlayerController : Character, Damageable
         if(!DoAttack)
         {
             characterRigidbody.velocity = new Vector2(horizontal * movementSpeed, characterRigidbody.velocity.y);
+            Debug.Log("StartJump: " + StartJump + ", StopJump: " + StopJump);
 
-            if (StartJump && OnGround && !Parry)
+            if (StartJump)
             {
-                characterRigidbody.velocity = new Vector2(characterRigidbody.velocity.x, jumpTakeOffSpeed);
+                if (OnGround && !Parry)
+                {
+                    characterRigidbody.velocity = new Vector2(characterRigidbody.velocity.x, jumpTakeOffSpeed);
+                   
+                }
                 StartJump = false;
             }
-
-            if(StopJump && characterRigidbody.velocity.y > 0)
+            if(StopJump)
             {
-                characterRigidbody.velocity = new Vector2(characterRigidbody.velocity.x, characterRigidbody.velocity.y * 0.3f);
+                if(characterRigidbody.velocity.y > 0)
+                {
+                    characterRigidbody.velocity = new Vector2(characterRigidbody.velocity.x, characterRigidbody.velocity.y * 0.5f);
+                   
+
+                    System.Diagnostics.StackTrace t = new System.Diagnostics.StackTrace();
+
+                }
                 StopJump = false;
             }
+            
         }
 
         characterAnimator.SetFloat("VelocityX", Mathf.Abs(characterRigidbody.velocity.x));
