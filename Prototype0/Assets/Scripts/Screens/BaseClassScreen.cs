@@ -5,8 +5,13 @@ using UnityEngine.EventSystems;
 
 public class BaseClassScreen : MonoBehaviour {
 
+    [SerializeField] private string screenId;
+    public string ScreenId { get { return screenId; } }
     public GameObject OptionOne;
     public static ScreenManager manager;
+
+
+    
 
     protected EventSystem eventSystem
     {

@@ -4,7 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour { 
+
+    [System.Serializable]
+    public class LevelSpawn
+    {
+        public string levelName;
+        public Vector3 spawnPosition;
+    }
 
     public Text scoreText;
     public GameObject player;
@@ -15,6 +22,7 @@ public class GameController : MonoBehaviour {
     int score;
     float elapsedTime = 0;
     [SerializeField] private Vector3 spawnPosition;
+    [SerializeField] private LevelSpawn[] levelSpawns;
 
     float timeBetweenSaves = 15f;
     float timeSinceLastSave = 0;
@@ -42,7 +50,6 @@ public class GameController : MonoBehaviour {
         PlayerController.Instance.coinsCollected += Instance_coinsCollected;
         PlayerController.Instance.playerDead += Instance_playerDead;
         PlayerController.Instance.flagCollected += Instance_flagCollected;
-        ScreenManager.instance.InitWindows();
         spawnPosition = player.transform.position;
 	}
     private void OnEnable()
@@ -68,7 +75,6 @@ public class GameController : MonoBehaviour {
     private void Instance_playerDead(object sender, PlayerDeadArgs e)
     {
         Debug.Log("PlayerISDead");
-        //ScreenManager.instance.ShowGameOver();
         RestartLevel();
     }
     
@@ -97,28 +103,34 @@ public class GameController : MonoBehaviour {
 
     public void FinishLevel()
     {
-        ScreenManager.instance.ShowFinishLevel();  
+        //ScreenManager.instance.ShowFinishLevel();  
     }
 
     public void RestartLevel()
     {
-        //Scene loadedLevel = SceneManager.GetActiveScene();
-        //SceneManager.LoadScene(loadedLevel.buildIndex);
-        //For now we can simply spawn the player to the last saved position
         Debug.Log("Changing position player to " + spawnPosition);
         player.transform.position = spawnPosition;
         CameraFollow.instance.ResetCamera();
-        ScreenManager.instance.InitWindows();
 
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        if(!hasFlag)
+        {
+            foreach(LevelSpawn levelSpawn in levelSpawns)
+            {
+                if(levelSpawn.levelName == scene.name)
+                {
+                    player.transform.position = levelSpawn.spawnPosition;
+                    CameraFollow.instance.ResetCamera();
+                }
+            }
+        }
         if(hasFlag)
         {
             player.transform.position = spawnPosition;
             CameraFollow.instance.ResetCamera();
-            ScreenManager.instance.InitWindows();
         }
         
     }

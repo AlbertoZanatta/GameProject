@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScreenManager : MonoBehaviour {
 
@@ -27,6 +28,16 @@ public class ScreenManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
 
     public BaseClassScreen CurrentScreen(int value)
@@ -110,6 +121,51 @@ public class ScreenManager : MonoBehaviour {
         screens[1].OpenWindow();
     }
 
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    { 
+        string sceneName = scene.name;
+        switch(sceneName)
+        {
+            case "MainMenu":
+                ShowMainMenuScreens();
+                break;
+            default:
+                ShowLevelScreens();
+                break;
+        }
 
+    }
 
+    private void ShowLevelScreens()
+    {
+        foreach (BaseClassScreen screen in screens)
+        {
+            Debug.Log(screen.ScreenId);
+            if (screen.ScreenId == "HUD_Screen" || screen.ScreenId == "Inventory_Screen")
+            {
+                screen.OpenWindow();
+            }
+            else
+            {
+                screen.CloseWindow();
+            }
+        }
+
+    }
+
+    private void ShowMainMenuScreens()
+    {
+        foreach (BaseClassScreen screen in screens)
+        {
+            Debug.Log(screen.ScreenId);
+            if (screen.ScreenId == "Intro_Screen")
+            { 
+                screen.OpenWindow();
+            }
+            else
+            {
+                screen.CloseWindow();
+            }
+        }
+    }
 }
