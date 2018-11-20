@@ -25,6 +25,8 @@ public class ScreenManager : MonoBehaviour {
             Destroy(gameObject);
         }
 
+        DontDestroyOnLoad(gameObject);
+
     }
 
     public BaseClassScreen CurrentScreen(int value)
@@ -96,4 +98,18 @@ public class ScreenManager : MonoBehaviour {
 
         screens[3].OpenWindow();
     }
+
+
+    public void ShowFinishLevel()
+    {
+        foreach (BaseClassScreen screen in screens)
+        {
+            screen.CloseWindow();
+        }
+
+        screens[1].OpenWindow();
+    }
+
+
+
 }

@@ -11,6 +11,21 @@ public class InventoryHUD : MonoBehaviour{
     public ItemSlotController[] itemSlots = new ItemSlotController[Inventory.SLOTS];
 
     private RectTransform rectTransform;
+    public InventoryHUD instance;
+    private void Awake()
+    {
+        //Check if instance already exists
+        if (instance == null)
+        {
+            //if not, set instance to this
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            // Then destroy this.This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            Destroy(gameObject);
+        }
+    }
 
     // Use this for initialization
     void Start () {

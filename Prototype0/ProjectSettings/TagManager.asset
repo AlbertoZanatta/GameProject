@@ -13,6 +13,7 @@ TagManager:
   - Nexus
   - Edge
   - Coin
+  - Platform
   layers:
   - Default
   - TransparentFX

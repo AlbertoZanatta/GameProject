@@ -24,7 +24,7 @@ public class CollectableKey : MonoBehaviour, IInventoryItem {
 
     public void OnPickUp()
     {
-        
+        Destroy(gameObject);
     }
 
     public void OnUse(Character character)

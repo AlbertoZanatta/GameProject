@@ -75,7 +75,7 @@ public abstract class EnemyState : Character, Damageable {
     {
         Vector2 direction = GetDirection();
         characterRigidbody.velocity = new Vector2(GetDirection().x * movementSpeed, characterRigidbody.velocity.y);
-        Debug.Log("velocity: " + characterRigidbody.velocity);
+        //Debug.Log("velocity: " + characterRigidbody.velocity);
         characterAnimator.SetFloat("VelocityX", Mathf.Abs(characterRigidbody.velocity.x));
         characterAnimator.SetFloat("VelocityY", characterRigidbody.velocity.y);
     }

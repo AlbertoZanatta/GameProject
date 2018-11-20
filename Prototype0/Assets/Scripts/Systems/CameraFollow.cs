@@ -35,6 +35,8 @@ public class CameraFollow : MonoBehaviour {
             Destroy(gameObject);
         }
 
+        DontDestroyOnLoad(gameObject);
+
     }
     // Use this for initialization
     void Start () {
@@ -45,24 +47,23 @@ public class CameraFollow : MonoBehaviour {
         leftOffset = new Vector3(-rightOffset.x, rightOffset.y, rightOffset.z);
         //leftOffset = new Vector3(leftOffset.x, 0, leftOffset.z);
         facingRight = GameController.instance.facingRight;
-        Debug.Log("Right offset: " + rightOffset);
-        Debug.Log("Left offset: " + leftOffset);
+        //Debug.Log("Right offset: " + rightOffset);
+        //Debug.Log("Left offset: " + leftOffset);
     }
 	
 	// Update is called once per frame
 	void LateUpdate () {
         //Camera follows up the player when he is about to exit the field of view
-        Vector3 desiredPosition = GameController.instance.facingRight ? t.transform.position + rightOffset :t.transform.position + leftOffset;
+        Vector3 desiredPosition = GameController.instance.facingRight ? player.transform.position + rightOffset :player.transform.position + leftOffset;
         Vector3 currentOffset = transform.position - t.position;
         
         if(currentOffset.y <= rightOffset.y)
         {
-            desiredPosition = new Vector3(desiredPosition.x, transform.position.y, desiredPosition.z);
+            //desiredPosition = new Vector3(desiredPosition.x, transform.position.y, desiredPosition.z);
         }
-        else 
-        {
-            desiredPosition = new Vector3(desiredPosition.x, desiredPosition.y, desiredPosition.z);
-        }
+       
+       desiredPosition = new Vector3(desiredPosition.x, desiredPosition.y, desiredPosition.z);
+     
         
         if (facingRight != GameController.instance.facingRight)
         {
@@ -84,4 +85,11 @@ public class CameraFollow : MonoBehaviour {
             //transform.position = new Vector3(0f, transform.position.y, transform.position.z);
         }
 	}
+
+    public void ResetCamera()
+    {
+        Vector3 desiredPosition = GameController.instance.facingRight ? player.transform.position + rightOffset : player.transform.position + leftOffset;
+        desiredPosition = new Vector3(desiredPosition.x, desiredPosition.y, -10);
+        transform.position = desiredPosition;
+    }
 }

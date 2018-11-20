@@ -29,7 +29,8 @@ public class FallingAnimation : StateMachineBehaviour {
 	//}
 
 	// OnStateIK is called right after Animator.OnAnimatorIK(). Code that sets up animation IK (inverse kinematics) should be implemented here.
-	//override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+	override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        CameraFollow.instance.FollowPlayer = true;
+    }
 }

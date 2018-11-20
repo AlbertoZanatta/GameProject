@@ -12,6 +12,7 @@ public class OpenDoor : MonoBehaviour {
         if(canOpen)
         {
             door.Open();
+            Destroy(gameObject);
         }
     }
 

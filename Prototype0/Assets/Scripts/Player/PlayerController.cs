@@ -14,10 +14,6 @@ public class PlayerController : Character, Damageable
     {
         get
         {
-            if(instance == null)
-            {
-                instance = GameObject.FindObjectOfType<PlayerController>();
-            }
             return instance;
         }
     }
@@ -28,6 +24,7 @@ public class PlayerController : Character, Damageable
     public Parry parryManager;
     public event System.EventHandler<CollectedCoinArgs> coinsCollected;
     public event System.EventHandler<PlayerDeadArgs> playerDead;
+    public event System.EventHandler<PlayerFlagArgs> flagCollected;
 
     //Vertical movement speed
     public float jumpTakeOffSpeed = 10f;
@@ -45,6 +42,15 @@ public class PlayerController : Character, Damageable
 
     public bool CanParry { get; set; }
 
+    public bool FacingRight { get{ return facingRight; } }
+
+
+
+    //Cooldown on the player attack
+    bool canAttack;
+    float lastAttackTime;
+    [SerializeField] float attackCooldown = 2f;
+
 
     //Detecting ground
     public LayerMask groundMask; //for detecting ground in function IsGrounded()
@@ -52,7 +58,21 @@ public class PlayerController : Character, Damageable
 
     //private boolean to control player 'invincibility' moments
     private bool canBeHit = true;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            //if not, set instance to this
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            // Then destroy this.This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            Destroy(gameObject);
+        }
 
+        DontDestroyOnLoad(gameObject);
+    }
     // Use this for initialization
     protected override void Start()
     {
@@ -69,13 +89,20 @@ public class PlayerController : Character, Damageable
     void Update()
     {
         HandleInput();
+
     }
 
     void HandleInput()
     {
         if (Input.GetButtonDown("Attack"))
         {
-            characterAnimator.SetTrigger("Attack");
+            if(canAttack)
+            {
+                characterAnimator.SetTrigger("Attack");
+                canAttack = false;
+                lastAttackTime = 0;
+            }
+            
         }
         else if (Input.GetButtonDown("Jump"))
         {
@@ -97,6 +124,13 @@ public class PlayerController : Character, Damageable
         {
             characterAnimator.SetBool("Parry", false);
         }
+
+        lastAttackTime += Time.deltaTime;
+        if (lastAttackTime >= attackCooldown)
+        {
+            canAttack = true;
+        }
+
     }
 
     public override void Attack()
@@ -129,7 +163,7 @@ public class PlayerController : Character, Damageable
     {
         if(characterRigidbody.velocity.y < 0)
         {
-            characterAnimator.SetBool("land", true);
+            characterAnimator.SetBool("grounded", true);
         }
         if(!DoAttack)
         {
@@ -197,8 +231,10 @@ public class PlayerController : Character, Damageable
 
     public override void Die()
     {
+        Debug.Log("PlayerDead");
         if(playerDead != null)
         {
+            Debug.Log("Call subscribers");
             playerDead(this, new PlayerDeadArgs());
         }
     }
@@ -217,6 +253,13 @@ public class PlayerController : Character, Damageable
         if (item != null)
         {
             inventory.AddItem(item);
+            if(item.itemName.Equals("Flag"))
+            {
+                if(flagCollected != null)
+                {
+                    flagCollected(this, new PlayerFlagArgs(transform.position, SceneManager.GetActiveScene().name));
+                }
+            }
             return;
         }
 
@@ -238,4 +281,16 @@ public class PlayerController : Character, Damageable
 public class PlayerDeadArgs : System.EventArgs
 {
 
+}
+
+public class PlayerFlagArgs : System.EventArgs
+{
+    public Vector3 catchPosition;
+    public string levelName;
+    public PlayerFlagArgs(Vector3 catchPosition, string levelName)
+    {
+        this.catchPosition = catchPosition;
+        this.levelName = levelName;
+
+    }
 }
