@@ -7,17 +7,19 @@ public class Turret : MonoBehaviour {
     public GameObject projectilePrefab;
     public Transform spawnPoint;
 
+
+    private BoxCollider2D collider; 
     bool canShoot = true;
     bool playerDetected = false;
     float lastTimeShoot = 0;
-    float timeShootCooldown = 2.5f;
+    float timeShootCooldown = 2.0f;
 
     private Animator turretAnimator;
 
     private void Start()
     {
         turretAnimator = GetComponent<Animator>();
-
+        collider = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -45,7 +47,15 @@ public class Turret : MonoBehaviour {
         ThrowableKnife script = tmp.GetComponent<ThrowableKnife>();
         if (script != null)
         {
-            script.Initialize(Vector2.right);
+            if (collider.offset.x < 0f)
+            {
+                script.Initialize(Vector2.left);
+
+            }
+            else
+            {
+                script.Initialize(Vector2.right);
+            }
         }
     }
 

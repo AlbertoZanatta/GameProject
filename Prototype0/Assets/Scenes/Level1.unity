@@ -2046,7 +2046,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6090,7 +6090,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11471,6 +11471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e743f309c0707454a83c63903d6c0ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenId: 
   OptionOne: {fileID: 1820994297}
   leftStats: {fileID: 0}
   rightStats: {fileID: 0}
@@ -15437,6 +15438,7 @@ MonoBehaviour:
   hasFlag: 0
   facingRight: 1
   spawnPosition: {x: 208.6, y: -224.2, z: 0}
+  levelSpawns: []
 --- !u!1 &321173562
 GameObject:
   m_ObjectHideFlags: 0
@@ -43930,6 +43932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696d789ee44710746ba0d11464d349d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenId: 
   OptionOne: {fileID: 0}
 --- !u!114 &961990008
 MonoBehaviour:
@@ -63463,7 +63466,7 @@ Prefab:
     - target: {fileID: 224668920954127154, guid: a987577c182638d4dae29a6706cce2ac,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0.0000086148575
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224668920954127154, guid: a987577c182638d4dae29a6706cce2ac,
         type: 2}
@@ -65304,6 +65307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696d789ee44710746ba0d11464d349d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenId: 
   OptionOne: {fileID: 0}
 --- !u!114 &1401366762
 MonoBehaviour:
@@ -79967,6 +79971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696d789ee44710746ba0d11464d349d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenId: 
   OptionOne: {fileID: 0}
 --- !u!114 &1739188476
 MonoBehaviour:
