@@ -1,0 +1,17 @@
+Things done:
+- Fixed camera;
+- Fixed Enemy Melee prefab;
+- Respawning (checkpoint positions were not initialized; after the fix, player wouldn't be respawned
+  as his last known position is beyound the checkpoint itself);
+- Fixed not aligned number in inventory 
+- Added lights and torches (better atmosphere)
+- Changed control in Respawn to reposition the facing direction of the player so to make it correct
+- Fixed enemy (MeleeStateEnemy) that checked the ground too deeply
+
+
+_____
+TO DO:
+- Life system
+- Player cannot use the key before opening the door
+- What about the flag in the inventory?
+- Level selection

@@ -4,18 +4,22 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour {
 
-    [SerializeField] protected Health health;
     public float movementSpeed = 5f;
-
-    protected bool facingRight = false;
-
+    public Transform spawnPoint;
+    //public property for accessing the animator
+    public Animator CharacterAnimator { get { return characterAnimator; } }
+    public Health Health
+    {
+        get { return health; }
+    }
+    public SpriteRenderer characterRenderer;
     //references to some components
     public Collider2D characterCollider;
     public Rigidbody2D characterRigidbody;
     public Animator characterAnimator;
-    //public property for accessing the animator
-    public Animator CharacterAnimator { get{ return characterAnimator; } }
-    public SpriteRenderer characterRenderer;
+
+    [SerializeField] protected Health health;
+    protected bool facingRight = false;
 
 	// Use this for initialization
 	virtual protected void Start () {
@@ -30,12 +34,6 @@ public abstract class Character : MonoBehaviour {
     {
         Die();
     }
-
-    // Update is called once per frame
-    void Update ()
-    {
-        
-	}
 
     protected virtual IEnumerator HitFlashing(float time, float frequency)
     {
@@ -59,33 +57,28 @@ public abstract class Character : MonoBehaviour {
     public abstract void Die();
     public abstract void Flip(float horizontal_movement);
 
-
     public abstract void Hit(Weapon weapon);
 
-    public Health Health
+    public virtual void Throw(GameObject throwablePrefab, Vector3 spawnPoint)
     {
-        get { return health; }
-    }
 
-    public virtual void Throw(GameObject throwablePrefab)
-    {
         if (facingRight)
         {
-            GameObject tmp = (GameObject)Instantiate(throwablePrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, -45)));
-            ThrowableKnife script = tmp.GetComponent<ThrowableKnife>();
+            GameObject tmp = (GameObject)Instantiate(throwablePrefab, spawnPoint, Quaternion.identity);
+            Throwable script = tmp.GetComponent<Throwable>();
             if (script != null)
             {
-                script.Initialize(Vector2.right);
+                script.SetDirection(Vector2.right);
             }
 
         }
         else
         {
-            GameObject tmp = (GameObject)Instantiate(throwablePrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, -45)));
-            ThrowableKnife script = tmp.GetComponent<ThrowableKnife>();
+            GameObject tmp = (GameObject)Instantiate(throwablePrefab, spawnPoint, Quaternion.identity);
+            Throwable script = tmp.GetComponent<Throwable>();
             if (script != null)
             {
-                script.Initialize(Vector2.left);
+                script.SetDirection(Vector2.left);
             }
         }
     }

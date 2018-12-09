@@ -89,7 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe332a5d1c53d94885adcb83a2f547d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: a946d2fb6ab8c8c4b9e050d97582aad7, type: 3}
+  itemName: Flag
+  itemImage: {fileID: 21300000, guid: a946d2fb6ab8c8c4b9e050d97582aad7, type: 3}
+  enemyDropped: 0
 --- !u!212 &212356911774674184
 SpriteRenderer:
   m_ObjectHideFlags: 1

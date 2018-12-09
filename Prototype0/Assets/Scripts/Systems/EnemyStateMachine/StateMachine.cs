@@ -9,19 +9,6 @@ public class StateMachine : MonoBehaviour {
     public IEnemyState rangedState;
     public IEnemyState meleeState;
 
-
-    // Use this for initialization
-    void Start ()
-    {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
-
     public void SetStates(IEnemyState idleState, IEnemyState patrolState, IEnemyState rangedState, IEnemyState meleeState)
     {
         this.idleState = idleState;

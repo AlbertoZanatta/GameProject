@@ -57,8 +57,8 @@ GameObject:
   - component: {fileID: 114196825931115350}
   - component: {fileID: 50657010446834368}
   - component: {fileID: 95061995071675008}
-  - component: {fileID: 114318443012039570}
   - component: {fileID: 60234508351873002}
+  - component: {fileID: 114628707423393362}
   m_Layer: 9
   m_Name: Wolf
   m_TagString: Enemy
@@ -83,6 +83,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1792905302575556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4941882714038588}
+  m_Layer: 9
+  m_Name: ForwardDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1887139374102432
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +109,21 @@ GameObject:
   - component: {fileID: 114724025269377740}
   m_Layer: 0
   m_Name: Drop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1904791787812600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4593082201425860}
+  m_Layer: 9
+  m_Name: BackwardDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +158,19 @@ Transform:
   m_Father: {fileID: 4717922429455954}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4593082201425860
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904791787812600}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.71, y: -0.51, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4717922429455954}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4717922429455954
 Transform:
   m_ObjectHideFlags: 1
@@ -135,7 +178,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1440180039521948}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 64.52, y: -215.23, z: 0}
+  m_LocalPosition: {x: 197.7, y: -225.27493, z: 0}
   m_LocalScale: {x: 0.574, y: 0.574, z: 1}
   m_Children:
   - {fileID: 4159757516637556}
@@ -143,6 +186,8 @@ Transform:
   - {fileID: 4804024401318936}
   - {fileID: 4895158825664284}
   - {fileID: 4906808117622940}
+  - {fileID: 4593082201425860}
+  - {fileID: 4941882714038588}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -197,6 +242,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4717922429455954}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4941882714038588
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792905302575556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.13, y: -0.54, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4717922429455954}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50657010446834368
 Rigidbody2D:
@@ -302,7 +360,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1, y: 0.2}
+  m_Offset: {x: -1, y: 0.76477516}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -313,7 +371,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.7027662, y: 1}
+  m_Size: {x: 3.7027664, y: 2.1295502}
   m_EdgeRadius: 0
 --- !u!95 &95061995071675008
 Animator:
@@ -344,28 +402,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e46ff073fedf2f4f82e085f159d5251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 114411337061955384}
   movementSpeed: 2
+  spawnPoint: {fileID: 4717922429455954}
+  characterRenderer: {fileID: 0}
   characterCollider: {fileID: 0}
   characterRigidbody: {fileID: 0}
   characterAnimator: {fileID: 0}
-  characterRenderer: {fileID: 0}
+  health: {fileID: 114411337061955384}
   stateMachine: {fileID: 114390560793600426}
+  forwardEnvironmentDetection: {fileID: 4941882714038588}
+  backwardEnvironmentDetection: {fileID: 4593082201425860}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 512
   meleeRange: 1.7
   throwRange: 3
   loot: {fileID: 114724025269377740}
---- !u!114 &114318443012039570
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1440180039521948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d151cc25c95c38f479bcd1e54183b234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  other: {fileID: 0}
 --- !u!114 &114390560793600426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,6 +445,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 3
   healthPoints: 3
+--- !u!114 &114628707423393362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440180039521948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6025242d3c4e75749a807adfd32a8a3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 114196825931115350}
 --- !u!114 &114666684677904710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -401,6 +468,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c8f4a48316719940b756c5704212b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon:
+    magical: 0
+    physical: 2
+    type: 4
 --- !u!114 &114724025269377740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,6 +485,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootObjects:
   - dropPrefab: {fileID: 1444061045762784, guid: 0ef2d16bba22e1c49b5436b2a082abda,
+      type: 2}
+    dropOdds: 1
+  - dropPrefab: {fileID: 1401972058279322, guid: 706ef20cb137b3e48a04eb2e8b970ec2,
       type: 2}
     dropOdds: 1
 --- !u!114 &114782834970437878

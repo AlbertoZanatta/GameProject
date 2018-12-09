@@ -5,44 +5,21 @@ using UnityEngine.UI;
 [System.Serializable]
 
 [CreateAssetMenu()]
-public class HealthPotion : MonoBehaviour, IInventoryItem
+public class HealthPotion : IInventoryItem
 {
-    public Sprite sprite;
     public int regain = 1;
-    //public CollectText collectText;
-
-    void Start()
-    {
-    }
-
-    public string itemName
-    {
-        get
-        {
-            return "HealthPotion";
-        }
-    }
-
-    public Sprite itemImage
-    {
-        get
-        {
-            return sprite;
-        }
-    }
-
-    public void OnDrop()
+    public override void OnDrop()
     {
         
     }
 
-    public void OnPickUp()
+    public override void OnPickUp()
     {
         //collectText.ShowText();
         Destroy(gameObject);
     }
 
-    public void OnUse(Character character)
+    public override void OnUse(Character character)
     {
         character.Health.ChangeHealth(regain);
     }

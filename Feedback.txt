@@ -1,0 +1,19 @@
+- Problema del salto 
+- Attacco istantaneo + cooldown
+- LAVA LEVEL: piattaforme che sprofondano nella lava.
+- Sistemare bocca del vulcano
+- Sistema di vite e checkpoint
+- Nerfare la strega (fermarla in idle state dopo qualche attacco)
+- Sistemare collisioni negli attacchi
+- Getti di lava
+- Spike che scompaiono alla prima volta
+- Ice blocks not destructible
+- Color of background a bif different
+- Attack - match cooldown time with animation
+- Visual indication of impaired movement
+- Fewer tiles in the breakable falls
+- Check breakable ice section
+- Improve stalactites placement
+- Tutorial during first way on first level
+- Breakable turrets (?)
+- Bordi alla mappa

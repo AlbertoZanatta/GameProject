@@ -1,18 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Weapon{
-
-    public enum WeaponType{
-        Sword,
-        Axe, 
-        Trap,
-        Fireball,
-        Head, 
-        Knife
-    }
-
+[System.Serializable]
+public class Weapon
+{ 
     public int magical;
     public int physical;
     public WeaponType type;
@@ -23,4 +14,14 @@ public class Weapon{
         this.physical = physical;
         this.type = type;
     }
+}
+
+public enum WeaponType
+{
+    Sword,
+    Axe,
+    Trap,
+    Fireball,
+    Head,
+    Knife
 }

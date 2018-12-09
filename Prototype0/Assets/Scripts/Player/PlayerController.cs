@@ -9,7 +9,7 @@ public class PlayerController : Character, Damageable
 {
     //Singleton patter for acessing the player instance
     private static PlayerController instance;
-
+    
     public static PlayerController Instance
     {
         get
@@ -31,6 +31,8 @@ public class PlayerController : Character, Damageable
 
     //Public properties (capital letters distinguish properties from normal variables)
     public bool DoAttack { get; set; }
+    Coroutine coroutine;
+
 
     public bool StartJump { get; set; }
 
@@ -42,7 +44,9 @@ public class PlayerController : Character, Damageable
 
     public bool CanParry { get; set; }
 
-    public bool FacingRight { get{ return facingRight; } }
+    public bool FacingRight { get; set; }
+
+    public bool OnIce { get; set; }
 
 
 
@@ -82,6 +86,7 @@ public class PlayerController : Character, Damageable
 
         distToGround = characterCollider.bounds.extents.y;
         inventory.itemUsed += Inventory_itemUsed;
+        FacingRight = true;
 
     }
 
@@ -89,7 +94,6 @@ public class PlayerController : Character, Damageable
     void Update()
     {
         HandleInput();
-
     }
 
     void HandleInput()
@@ -167,8 +171,19 @@ public class PlayerController : Character, Damageable
         }
         if(!DoAttack)
         {
-            characterRigidbody.velocity = new Vector2(horizontal * movementSpeed, characterRigidbody.velocity.y);
-            Debug.Log("StartJump: " + StartJump + ", StopJump: " + StopJump);
+            if(!OnIce)
+            {
+                characterRigidbody.velocity = new Vector2(horizontal * movementSpeed, characterRigidbody.velocity.y);
+            }
+            else
+            {
+                float dir = facingRight ? -1 : 1;
+                //Debug.Log("dir: " + dir + ", horizontal: " + horizontal);
+                if(Mathf.Abs(characterRigidbody.velocity.x) <= movementSpeed || dir*horizontal >= 0)
+                characterRigidbody.AddForce(new Vector2(horizontal * movementSpeed, characterRigidbody.velocity.y));
+                
+       
+            }
 
             if (StartJump)
             {
@@ -218,7 +233,7 @@ public class PlayerController : Character, Damageable
             if(damage > 0)
             {
                 health.ChangeHealth(-damage);
-                StartCoroutine(HitFlashing(0.6f, 0.1f));
+                coroutine = StartCoroutine(HitFlashing(0.6f, 0.1f));
             }  
         }  
     }
@@ -243,10 +258,8 @@ public class PlayerController : Character, Damageable
 
     public override void Die()
     {
-        Debug.Log("PlayerDead");
         if(playerDead != null)
         {
-            Debug.Log("Call subscribers");
             playerDead(this, new PlayerDeadArgs());
         }
     }
@@ -288,6 +301,7 @@ public class PlayerController : Character, Damageable
             }
         }
     }
+
 }
 
 public class PlayerDeadArgs : System.EventArgs
