@@ -21,15 +21,18 @@ public class RangedState : IEnemyState
         {
             enemy.ChangeState(enemy.stateMachine.meleeState);
         }
-
-        if (enemy.Target != null)
-        {
-            enemy.Move();
-        }
         else
         {
-            enemy.ChangeState(enemy.stateMachine.idleState);
-        }
+            if (enemy.Target != null)
+            {
+                enemy.Move();
+                //Debug.Log("Moving forward!!");
+            }
+            else
+            {
+                enemy.ChangeState(enemy.stateMachine.idleState);
+            }
+        }  
     }
 
     public void Exit()

@@ -8,11 +8,6 @@ public class EnemyWitchState : EnemyState {
     public float keepDistance = 6f;
     public LootDrop loot;
 
-    protected override void SetStates()
-    {
-        stateMachine.SetStates(new IdleStateWitch(), new PatrolStateWitch(), new RangedStateWitch(), new MeleeStateWitch());
-    }
-
     public void ThrowFireball()
     {
         Throw(fireballPrefab, spawnPoint.position);

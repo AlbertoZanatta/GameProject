@@ -5,14 +5,6 @@ using UnityEngine;
 public class MeleeEnemyState : EnemyState {
     public LootDrop loot;
 
-    protected override void SetStates()
-    {
-        if(stateMachine != null)
-        {
-            stateMachine.SetStates(new IdleState(), new PatrolState(), new RangedState(), new MeleeState());
-        }
-    }
-
     public override void Die()
     {
         if(loot != null)

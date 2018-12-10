@@ -18,6 +18,10 @@ public class IdleStateWitch : IEnemyState{
 
     public void Execute()
     {
+        if(enemy.ForceIdling)
+        {
+            Debug.Log("I'm force idling!");
+        }
         Idle();
         if(!enemy.ForceIdling)
         {

@@ -1,14 +1,42 @@
 - Problema del salto 
-- Attacco istantaneo + cooldown
+- Attacco istantaneo + cooldown //As people felt the attack feedback from the viking was odd, tried to make
+                                  it feel more 'instant' by removing a frame to the attack animation and enabling
+                                  the box collider of the axe one more frame at the end of the animation.
+				  Furthermore, in order to make the attack feel more responsive and to respond to
+                                  some feedback provided during the playtesting day, we adjusted the cooldown time
+                                  of the Player's attack so that it matches the repositioning of the axe in its
+                                  'default' position. Some players argued that it felt strange not being able
+                                   to attack after the attack animation finished and the character returned
+                                   to its idle appearance.
 - LAVA LEVEL: piattaforme che sprofondano nella lava.
 - Sistemare bocca del vulcano
 - Sistema di vite e checkpoint
 - Nerfare la strega (fermarla in idle state dopo qualche attacco)
-- Sistemare collisioni negli attacchi
+- Sistemare collisioni negli attacchi //Other problems presented by the combat system were the following: the sprite
+                                        of the player and of the enemy would overlap in such ways that the player
+                                        couldn't attack the opponent (as the box collider of its axe would not
+                                        collide with the enemy's collider) and the opponent could damage the player
+                                        even with him parrying (as his weapons could reach the body collider behind
+                                        the shield collider).
+                                        We tried to handle this problem in different ways:
+					Allowing players and opponents to collide. This however presented some of the
+                                        same problems we wanted to avoid by allowing the player and the enemy to overlap:
+                                        the player could jump over enemies, and the opponents' attacks would result
+                                        in force being applied to the character ridgibdody which in consequence would
+                                        slide further away from the enemy.
+                                        The second solution was reworking the artificial intelligence of the enemies
+                                        to make them more aware of the 'overlapping situation'.
+					This in the end entailed making the opponent moving backward for a few frames
+                                        when the player is within a fixed 'Overlap distance'. This also resulted in a
+                                        more interesting enemy behaviour - enemies attack the player from behind if
+                                        he comes too close. But lso a strange 'back and forth' movement in certain situations
+                                        that still we were not able to fix.
+                                        
+					
 - Getti di lava
 - Spike che scompaiono alla prima volta
 - Ice blocks not destructible
-- Color of background a bif different
+- Color of background a bit different
 - Attack - match cooldown time with animation
 - Visual indication of impaired movement
 - Fewer tiles in the breakable falls
@@ -17,3 +45,15 @@
 - Tutorial during first way on first level
 - Breakable turrets (?)
 - Bordi alla mappa
+
+//As we found that combat was not very engaging and for the most part people would rush through the enemies
+ in order to reach their final goal, we tried to change our approach in designing the levels for the two later
+ stages of the game: we tried to make the level itself more engaging by allowing the player to interact with
+ the environment and have him interact with some small puzzles to pave his way to the objective.
+
+//As the control scheme is not very intuitive an neither is the main goal of the game, we designed a step by step
+tutorial covering the first half of the beginning level.  
+
+//In order to motivate the player to engage with the combat system and face the different kinds of opponents
+we introduce a simple loot system. At their death, opponents drop valuable items (potions, throwable knifes, keys)
+that help the player proceeding further into the level.

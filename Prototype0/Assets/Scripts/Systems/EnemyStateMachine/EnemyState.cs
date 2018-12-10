@@ -17,6 +17,8 @@ public abstract class EnemyState : Character, Damageable {
     private IEnemyState currentState;
     [SerializeField] private float meleeRange = 1.2f;
     [SerializeField] private float throwRange = 3f;
+    [SerializeField] private float overlapDist = 0.5f;
+
 
 
 
@@ -27,6 +29,19 @@ public abstract class EnemyState : Character, Damageable {
             if(Target != null)
             {
                 return Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
+            }
+
+            return false;
+        }
+    }
+
+    public bool InOverlapDist
+    {
+        get
+        {
+            if (Target != null)
+            {
+                return Vector2.Distance(transform.position, Target.transform.position) < overlapDist;
             }
 
             return false;
@@ -52,13 +67,12 @@ public abstract class EnemyState : Character, Damageable {
     protected override void Start ()
     {
         base.Start();
-        SetStates();
+        stateMachine.SetStates();
         ChangeState(stateMachine.idleState); // now the enemy is in Idle State
+        Debug.Log("current state: " + currentState);
         IsAttacking = false;
     }
 
-    protected abstract void SetStates(); //Each enemy can implement its own set of states
-	
 	// Update is called once per frame
 	protected virtual void Update ()
     {

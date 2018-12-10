@@ -149,7 +149,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1391773908239996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.45, y: -0.09, z: 0}
+  m_LocalPosition: {x: 0.54, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4751661502778404}
@@ -162,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1188871564764008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.7, y: -213.6, z: 0}
+  m_LocalPosition: {x: -7.7, y: -14.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4882523775173564}
@@ -395,7 +395,7 @@ MonoBehaviour:
   inventory: {fileID: 114983253584933856}
   parryManager: {fileID: 114355457275337734}
   jumpTakeOffSpeed: 8
-  attackCooldown: 1
+  attackCooldown: 0.7
   groundMask:
     serializedVersion: 2
     m_Bits: 256

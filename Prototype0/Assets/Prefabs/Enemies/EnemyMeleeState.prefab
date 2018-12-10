@@ -85,7 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4699531640670012}
-  - component: {fileID: 114360294318786162}
+  - component: {fileID: 114699480932484956}
   m_Layer: 9
   m_Name: StateMachine
   m_TagString: Untagged
@@ -209,7 +209,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1786112085333068}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 81.88138, y: -210.45863, z: 0}
+  m_LocalPosition: {x: 220.48317, y: 10.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4924548172348656}
@@ -363,7 +363,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1055111262681726}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 2d6f87a6687f3dd419cce41922975e1c, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -382,7 +382,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.14563107, y: 0.14963458}
+  m_Offset: {x: 0.32523882, y: -0.12614632}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -393,7 +393,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5032845, y: 1.2992691}
+  m_Size: {x: 1.144069, y: 1.2992691}
   m_EdgeRadius: 0
 --- !u!61 &61739252634195466
 BoxCollider2D:
@@ -453,17 +453,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114360294318786162
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1363591538885528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e0205ee4804a0044ae9c8ffe12d1cbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114470131308525670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -489,6 +478,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 5
   healthPoints: 5
+--- !u!114 &114699480932484956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1363591538885528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d900ca066404fc44c964e9fb46d696e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114817370776655496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -519,7 +519,7 @@ MonoBehaviour:
   characterRigidbody: {fileID: 0}
   characterAnimator: {fileID: 0}
   health: {fileID: 114506138466798766}
-  stateMachine: {fileID: 114360294318786162}
+  stateMachine: {fileID: 114699480932484956}
   forwardEnvironmentDetection: {fileID: 4033448247362110}
   backwardEnvironmentDetection: {fileID: 4475457734901716}
   groundMask:
@@ -530,6 +530,7 @@ MonoBehaviour:
     m_Bits: 512
   meleeRange: 0.8
   throwRange: 3
+  overlapDist: 0.4
   loot: {fileID: 114898933359361350}
 --- !u!114 &114898933359361350
 MonoBehaviour:
@@ -549,6 +550,9 @@ MonoBehaviour:
   - dropPrefab: {fileID: 1444061045762784, guid: 0ef2d16bba22e1c49b5436b2a082abda,
       type: 2}
     dropOdds: 0.1
+  - dropPrefab: {fileID: 1131345317165770, guid: 51fde218a0747dc4db7d8bccec406523,
+      type: 2}
+    dropOdds: 1
 --- !u!114 &114999070091581770
 MonoBehaviour:
   m_ObjectHideFlags: 1

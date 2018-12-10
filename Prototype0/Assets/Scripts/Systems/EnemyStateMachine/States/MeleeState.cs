@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class MeleeState : IEnemyState
 {
-    private float attackTimer = 0; 
-    private float attackCoolDown = 3f; 
-    private bool canAttack = true;
+    public float safeDist = 0.6f;
 
+    private float attackTimer = 0; 
+    private float attackCoolDown = 1.5f; 
+    private bool canAttack = true;
     private EnemyState enemy;
 
     public void Enter(EnemyState enemy)
@@ -18,15 +19,26 @@ public class MeleeState : IEnemyState
     public void Execute()
     {
         enemy.LookAtTarget();
-        Attack();
-        if(enemy.InThrowRange && !enemy.InMeleeRange)
+        if (enemy.InOverlapDist)
         {
-            enemy.ChangeState(enemy.stateMachine.rangedState);
+            //Debug.Log("Moving back!!");
+            enemy.MoveBack();
         }
-        else if(enemy.Target == null)
+        else
         {
-            enemy.ChangeState(enemy.stateMachine.idleState);
-        }
+            if(enemy.InMeleeRange)
+            {
+                Attack();
+            }
+            else if (enemy.InThrowRange)
+            {
+                enemy.ChangeState(enemy.stateMachine.rangedState);
+            }
+            else if (enemy.Target == null)
+            {
+                enemy.ChangeState(enemy.stateMachine.idleState);
+            }
+        }   
     }
 
     public void Exit()

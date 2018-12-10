@@ -7,12 +7,16 @@ public class RangedStateWitch : IEnemyState
     private EnemyState enemy;
 
     private float throwTimer = 0f; //how much time has passed since we threw the last projectile
-    private float throwCoolDown = 0.5f; //how long before throwing another projectile
+    private float throwCoolDown = Random.Range(1.4f, 1.8f); //how long before throwing another projectile
     private bool canThrow = true;
+    private int consecutiveAttacks = 0;
+
     public void Enter(EnemyState enemy)
     {
         this.enemy = enemy;
         enemy.CharacterAnimator.SetTrigger("Attack");
+        consecutiveAttacks++;
+        Debug.Log("Consecutive attacks: " + consecutiveAttacks);
 
     }
 
@@ -21,6 +25,15 @@ public class RangedStateWitch : IEnemyState
         enemy.LookAtTarget();
         if (!enemy.IsAttacking)
         {
+            if (consecutiveAttacks >= 3)
+            {
+                Debug.Log("Going to idle!");
+                consecutiveAttacks = 0;
+                enemy.ForceIdling = true;
+                enemy.ChangeState(enemy.stateMachine.idleState);
+                return;
+            }
+
             if (enemy.InMeleeRange)
             {
                 enemy.ChangeState(enemy.stateMachine.meleeState);
@@ -47,9 +60,6 @@ public class RangedStateWitch : IEnemyState
 
     public void Exit()
     {
-        throwTimer = 0;
-        canThrow = false;
-        this.enemy.movementSpeed = 3.5f;
     }
 
     public void OnTriggerEnter(Collider2D other)
@@ -69,8 +79,9 @@ public class RangedStateWitch : IEnemyState
         {
             canThrow = false;
             throwTimer = 0;
-            throwCoolDown = Random.Range(1f, 1.4f);
+            throwCoolDown = Random.Range(1.5f, 2.5f);
             enemy.CharacterAnimator.SetTrigger("Attack");
+            consecutiveAttacks++;
         }
     }
 }
