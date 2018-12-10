@@ -63,7 +63,7 @@ public class ScreenManager : MonoBehaviour {
         }
     }
 
-    internal void InitWindows()
+    public void InitWindows()
     {
         foreach (BaseClassScreen screen in screens)
         {
@@ -72,6 +72,22 @@ public class ScreenManager : MonoBehaviour {
 
         screens[0].OpenWindow();
         screens[2].OpenWindow();
+    }
+
+    public void ShowPauseMenu()
+    {
+        foreach (BaseClassScreen screen in screens)
+        {
+            if (screen.ScreenId == "Pause_Screen")
+            {
+                screen.OpenWindow();
+            }
+            else
+            {
+                screen.CloseWindow();
+            }
+        }
+        Time.timeScale = 0f;
     }
 
     public BaseClassScreen Open(int value)
@@ -102,20 +118,9 @@ public class ScreenManager : MonoBehaviour {
 
     public void ShowGameOver()
     {
-        foreach( BaseClassScreen screen in screens)
-        {
-            screen.CloseWindow();
-        }
-
-        screens[3].OpenWindow();
-    }
-
-
-    public void ShowFinishLevel()
-    {
         foreach (BaseClassScreen screen in screens)
         {
-            screen.CloseWindow(); if (screen.ScreenId == "Levelcompleted_Screen")
+            if (screen.ScreenId == "Gameover_Screen")
             {
                 screen.OpenWindow();
             }
@@ -125,6 +130,40 @@ public class ScreenManager : MonoBehaviour {
             }
         }
     }
+
+
+    public void ShowFinishLevel()
+    {
+        foreach (BaseClassScreen screen in screens)
+        {
+            if (screen.ScreenId == "Levelcompleted_Screen")
+            {
+                screen.OpenWindow();
+            }
+            else
+            {
+                screen.CloseWindow();
+            }
+        }
+    }
+
+
+
+    public void ShowInstructions()
+    {
+        foreach (BaseClassScreen screen in screens)
+        {
+            if (screen.ScreenId == "ButtonInstructions_Screen")
+            {
+                screen.OpenWindow();
+            }
+            else
+            {
+                screen.CloseWindow();
+            }
+        }
+    }
+
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     { 
@@ -141,7 +180,7 @@ public class ScreenManager : MonoBehaviour {
 
     }
 
-    private void ShowLevelScreens()
+    public void ShowLevelScreens()
     {
         foreach (BaseClassScreen screen in screens)
         {
@@ -157,11 +196,10 @@ public class ScreenManager : MonoBehaviour {
 
     }
 
-    private void ShowMainMenuScreens()
+    public void ShowMainMenuScreens()
     {
         foreach (BaseClassScreen screen in screens)
         {
-            Debug.Log(screen.ScreenId);
             if (screen.ScreenId == "Intro_Screen")
             { 
                 screen.OpenWindow();

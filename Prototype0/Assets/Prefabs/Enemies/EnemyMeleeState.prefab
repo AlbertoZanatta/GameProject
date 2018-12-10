@@ -550,9 +550,6 @@ MonoBehaviour:
   - dropPrefab: {fileID: 1444061045762784, guid: 0ef2d16bba22e1c49b5436b2a082abda,
       type: 2}
     dropOdds: 0.1
-  - dropPrefab: {fileID: 1131345317165770, guid: 51fde218a0747dc4db7d8bccec406523,
-      type: 2}
-    dropOdds: 1
 --- !u!114 &114999070091581770
 MonoBehaviour:
   m_ObjectHideFlags: 1

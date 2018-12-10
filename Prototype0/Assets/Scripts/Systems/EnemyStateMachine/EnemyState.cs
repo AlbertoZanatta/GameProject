@@ -19,6 +19,8 @@ public abstract class EnemyState : Character, Damageable {
     [SerializeField] private float throwRange = 3f;
     [SerializeField] private float overlapDist = 0.5f;
 
+    private Coroutine coroutine;
+
 
 
 
@@ -69,7 +71,7 @@ public abstract class EnemyState : Character, Damageable {
         base.Start();
         stateMachine.SetStates();
         ChangeState(stateMachine.idleState); // now the enemy is in Idle State
-        Debug.Log("current state: " + currentState);
+        //Debug.Log("current state: " + currentState);
         IsAttacking = false;
     }
 
@@ -158,7 +160,10 @@ public abstract class EnemyState : Character, Damageable {
     {
         int physicalDamage = weapon.physical;
         health.ChangeHealth(-physicalDamage);
-        StartCoroutine(HitFlashing(1f, 0.1f));
+        if(gameObject.activeSelf)
+        {
+            StartCoroutine(HitFlashing(1f, 0.1f));
+        } 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

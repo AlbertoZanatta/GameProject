@@ -10,15 +10,6 @@ public class IntroScreen : BaseClassScreen {
 
     public override void OpenWindow()
     {
-        bool isAbleToContinue = false;
-
-        continueButton.gameObject.SetActive(isAbleToContinue);
-
-        if (continueButton.gameObject.activeSelf)
-        {
-            OptionOne = continueButton.gameObject;
-        }
-
         base.OpenWindow();
     }
 
@@ -38,8 +29,20 @@ public class IntroScreen : BaseClassScreen {
         Debug.Log("Options");
     }
 
+    public void Level1()
+    {
+
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void Level2()
+    {
+
+        SceneManager.LoadScene("Level2");
+    }
 
 
 
-    
+
+
 }

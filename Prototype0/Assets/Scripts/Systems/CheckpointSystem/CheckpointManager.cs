@@ -8,8 +8,8 @@ public class CheckpointManager : MonoBehaviour {
     Vector3 currentCheckpoint;
     int playerHealth;
 
-    RespawnController[] respawnables;
-    PlayerRespawnController playerRespawn;
+    List<RespawnController> respawnables = new List<RespawnController>();
+    public PlayerRespawnController playerRespawn;
     public static CheckpointManager instance;
     void Awake()
     {
@@ -31,8 +31,7 @@ public class CheckpointManager : MonoBehaviour {
 
     private void Start()
     {
-        Debug.Log("CheckpointManager start");
-        playerRespawn = PlayerController.Instance.GetComponent<PlayerRespawnController>();        
+       
     }
     private void OnEnable()
     {
@@ -48,37 +47,63 @@ public class CheckpointManager : MonoBehaviour {
 
     private void Instance_playerDead(object sender, PlayerDeadArgs e)
     {
-    
-        foreach(RespawnController respawnable in respawnables)
+        if(GameController.instance.GetLives() > 1) //Respawn only if player has lives left
         {
-            if(GameController.instance.levelForward)
+            foreach (RespawnController respawnable in respawnables)
             {
-                if (respawnable.GetPosition().x >= currentCheckpoint.x)
-                {
-                    respawnable.OnRespawn();
-                }
+                respawnable.OnRespawn();
             }
-            else
-            {
-                if (respawnable.GetPosition().x <= currentCheckpoint.x)
-                {
-                    respawnable.OnRespawn();
-                }
-            }
-            
-        }
 
-        playerRespawn.OnRespawn();
+            playerRespawn.OnRespawn();
+        }   
     }
 
     public void SetCheckpoint(Vector3 newCheckpoint)
     {
         currentCheckpoint = newCheckpoint;
+        RespawnController[] found = FindObjectsOfType<RespawnController>();
+        respawnables.Clear();
+        foreach (RespawnController respawnable in found)
+        {
+
+            if (!respawnable.CompareTag("Player"))
+            {
+                if (GameController.instance.levelForward)
+                {
+                    if (respawnable.GetPosition().x >= currentCheckpoint.x || respawnable.gameObject.activeSelf)
+                    {
+                        respawnables.Add(respawnable);
+                    }
+                }
+                else
+                {
+                    if (respawnable.GetPosition().x <= currentCheckpoint.x || respawnable.gameObject.activeSelf)
+                    {
+                        respawnables.Add(respawnable);
+                    }
+                }
+            }
+               
+        }
+
+
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        respawnables = FindObjectsOfType<RespawnController>();
+        playerRespawn = PlayerController.Instance.GetComponent<PlayerRespawnController>();
+
+        //Update list of respawnables
+        respawnables.Clear();
+        RespawnController[] found = FindObjectsOfType<RespawnController>();
+        //Remove the player from the list of respawnables
+        foreach(RespawnController respawnable in found)
+        {
+            if(!respawnable.CompareTag("Player"))
+            {
+                respawnables.Add(respawnable);
+            }
+        }
     }
 
 

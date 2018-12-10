@@ -294,7 +294,7 @@ public class PlayerController : Character, Damageable
     {
         if(collision.tag == "Coin")
         {
-            Debug.Log("CoinCollected");
+            //Debug.Log("CoinCollected");
             if(coinsCollected != null)
             {
                 coinsCollected(this, new CollectedCoinArgs());

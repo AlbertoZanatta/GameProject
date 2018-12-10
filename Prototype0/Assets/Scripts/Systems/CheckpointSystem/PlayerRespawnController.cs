@@ -10,7 +10,7 @@ public class PlayerRespawnController : RespawnController{
 
     public override void OnRespawn()
     {
-        Debug.Log("PlayerRespawn!");
+        //Debug.Log("PlayerRespawn!");
         base.OnRespawn();
         PlayerController.Instance.Health.SetHealth(healthPoints);
         if((GameController.instance.levelForward && PlayerController.Instance.transform.localScale.x < 0) || (!GameController.instance.levelForward && PlayerController.Instance.transform.localScale.x > 0))
@@ -24,7 +24,7 @@ public class PlayerRespawnController : RespawnController{
 
     public void UpdateState()
     {
-        Debug.Log("Update state!");
+        //Debug.Log("Update state!");
         initialPosition = PlayerController.Instance.transform.position;
         healthPoints = PlayerController.Instance.Health.CurrentHealth;
         copiedInventory = PlayerController.Instance.inventory.GetInventory();

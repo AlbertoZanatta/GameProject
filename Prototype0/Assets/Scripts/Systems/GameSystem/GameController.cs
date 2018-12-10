@@ -13,7 +13,9 @@ public class GameController : MonoBehaviour {
     public bool facingRight = true;
     public bool levelForward;
     int killedEnemies = 0;
+    int lives = 2;
     int score;
+    Vector3 beginLevelPos;
 
     public static GameController instance;
     void Awake()
@@ -44,16 +46,48 @@ public class GameController : MonoBehaviour {
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
+    private void Update()
+    {
+        if(Input.GetButtonDown("Pause"))
+        {
+            ScreenManager.instance.ShowPauseMenu();
+        }
+    }
+
+    private void PauseGame()
+    {
+        throw new NotImplementedException();
+    }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        scoreText.text = lives.ToString();
+
         if (scene.name.Contains("Back"))
         {
             levelForward = false;
         }
         else
         {
+           
+           
             levelForward = true;
+        }
+
+        GameObject beginLevel = GameObject.FindGameObjectWithTag("LevelBeginning");
+        if (beginLevel != null)
+        {
+            beginLevelPos = beginLevel.transform.position;
+            PlayerController.Instance.transform.position = new Vector3(this.beginLevelPos.x, this.beginLevelPos.y, PlayerController.Instance.transform.position.z);
+            PlayerController.Instance.Health.Refill();
+            PlayerController.Instance.inventory.ResetInventory(new List<ItemStack>());
+            if ((levelForward && PlayerController.Instance.transform.localScale.x < 0) || (!levelForward && PlayerController.Instance.transform.localScale.x > 0))
+            {
+                Vector3 localScale = PlayerController.Instance.transform.localScale;
+                PlayerController.Instance.transform.localScale = new Vector3(-1 * localScale.x, localScale.y, localScale.z);
+                PlayerController.Instance.FacingRight = !PlayerController.Instance.FacingRight;
+            }
+
         }
     }
 
@@ -72,13 +106,25 @@ public class GameController : MonoBehaviour {
 
     private void Instance_playerDead(object sender, PlayerDeadArgs e)
     {
-        RestartLevel();
+        lives--;
+        scoreText.text = lives.ToString();
+        if(lives == 0)
+        {
+            lives = 2;
+            scoreText.text = lives.ToString();
+            GameOver();
+        }
     }
-    
+
+    private void GameOver()
+    {
+        ScreenManager.instance.ShowGameOver();
+    }
+
     private void Instance_coinsCollected(object sender, CollectedCoinArgs e)
     {
         score += 10;
-        scoreText.text = score.ToString();
+        
     }
 
     public void FinishLevel()
@@ -87,13 +133,19 @@ public class GameController : MonoBehaviour {
     }
 
     public void RestartLevel()
-    { 
-        CameraFollow.instance.ResetCamera();
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.buildIndex);
     }
 
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public int GetLives()
+    {
+        return lives;
     }
 }
 

@@ -26,7 +26,7 @@ public class RangedState : IEnemyState
             if (enemy.Target != null)
             {
                 enemy.Move();
-                //Debug.Log("Moving forward!!");
+                Debug.Log("Moving forward!!");
             }
             else
             {

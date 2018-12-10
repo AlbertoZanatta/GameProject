@@ -15,6 +15,7 @@ TagManager:
   - Coin
   - Platform
   - Shield
+  - LevelBeginning
   layers:
   - Default
   - TransparentFX

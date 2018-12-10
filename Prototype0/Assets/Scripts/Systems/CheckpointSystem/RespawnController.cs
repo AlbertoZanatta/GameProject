@@ -13,7 +13,7 @@ public class RespawnController : MonoBehaviour {
 
     public virtual void OnRespawn()
     {
-        gameObject.SetActive(true);
+        this.gameObject.SetActive(true);
         transform.position = initialPosition;
     }
 

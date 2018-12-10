@@ -13,10 +13,10 @@ public class Checkpoint: MonoBehaviour
     {
         if(!triggered)//First time the checkpoint is triggered
         {
-            Debug.Log("CheckPoint triggered");
             PlayerRespawnController playerRespawnController = collision.gameObject.GetComponent<PlayerRespawnController>();
             if(playerRespawnController != null)
             {
+                Debug.Log("CheckPoint triggered");
                 triggered = true;
                 playerRespawnController.UpdateState();
                 CheckpointManager.instance.SetCheckpoint(transform.position);
