@@ -74,6 +74,25 @@ public class ScreenManager : MonoBehaviour {
         screens[2].OpenWindow();
     }
 
+    public bool CheckScreen()
+    {
+        foreach (BaseClassScreen screen in screens)
+        {
+            if (screen.ScreenId == "Intro_Screen" || screen.ScreenId == "Gameover_Screen" || screen.ScreenId == "Levelcompleted_Screen" || screen.ScreenId == "ButtonInstructions_Screen")
+            {
+                if (screen.gameObject.activeSelf)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void ShowPauseMenu()
     {
         foreach (BaseClassScreen screen in screens)

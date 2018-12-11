@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour {
     public bool facingRight = true;
     public bool levelForward;
     int killedEnemies = 0;
-    int lives = 2;
+    int lives = 100;
     int score;
     Vector3 beginLevelPos;
 
@@ -50,7 +50,11 @@ public class GameController : MonoBehaviour {
     {
         if(Input.GetButtonDown("Pause"))
         {
-            ScreenManager.instance.ShowPauseMenu();
+            if(ScreenManager.instance.CheckScreen())
+            {
+                ScreenManager.instance.ShowPauseMenu();
+            }
+            
         }
     }
 
@@ -69,8 +73,9 @@ public class GameController : MonoBehaviour {
         }
         else
         {
-           
-           
+            PlayerController.Instance.inventory.ResetInventory(new List<ItemStack>());
+            PlayerController.Instance.Health.Refill();
+
             levelForward = true;
         }
 
@@ -79,8 +84,8 @@ public class GameController : MonoBehaviour {
         {
             beginLevelPos = beginLevel.transform.position;
             PlayerController.Instance.transform.position = new Vector3(this.beginLevelPos.x, this.beginLevelPos.y, PlayerController.Instance.transform.position.z);
-            PlayerController.Instance.Health.Refill();
-            PlayerController.Instance.inventory.ResetInventory(new List<ItemStack>());
+       
+         
             if ((levelForward && PlayerController.Instance.transform.localScale.x < 0) || (!levelForward && PlayerController.Instance.transform.localScale.x > 0))
             {
                 Vector3 localScale = PlayerController.Instance.transform.localScale;

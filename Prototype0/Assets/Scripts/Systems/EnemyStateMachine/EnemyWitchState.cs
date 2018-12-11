@@ -15,10 +15,10 @@ public class EnemyWitchState : EnemyState {
     
     public override void Die()
     {
-        /*if (loot != null)
+        if (loot != null)
         {
             loot.Drop(transform.position);
-        }*/
+        }
         base.Die();
     }
 

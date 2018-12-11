@@ -57,3 +57,10 @@ tutorial covering the first half of the beginning level.
 //In order to motivate the player to engage with the combat system and face the different kinds of opponents
 we introduce a simple loot system. At their death, opponents drop valuable items (potions, throwable knifes, keys)
 that help the player proceeding further into the level.
+
+LEVEL2 
+//Make it more challenging to reach the top of the vulcano (added traps)
+//Reduce some enemies
+//Added a new checkpoint at the top of the vulcano, so that the player can be respawned there if he dies in the final battle
+//Door
+//Dynamically create level beginning for levelBack

@@ -38,5 +38,6 @@ public class MovingPillar : MonoBehaviour {
     private void OnCollisionExit2D(Collision2D collision)
     {
         collision.gameObject.transform.parent = null;
+        DontDestroyOnLoad(collision.gameObject);
     }
 }
