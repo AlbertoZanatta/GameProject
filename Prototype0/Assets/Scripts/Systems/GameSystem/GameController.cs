@@ -119,6 +119,7 @@ public class GameController : MonoBehaviour {
     private void GameOver()
     {
         ScreenManager.instance.ShowGameOver();
+        SoundManager.instance.GameOver("start");
     }
 
     private void Instance_coinsCollected(object sender, CollectedCoinArgs e)
@@ -130,17 +131,21 @@ public class GameController : MonoBehaviour {
     public void FinishLevel()
     {
         ScreenManager.instance.ShowFinishLevel();  
+        SoundManager.instance.levelComplete("start");
     }
 
     public void RestartLevel()
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.buildIndex);
+        SoundManager.instance.GameOver("stop");
     }
 
     public void GoToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        SoundManager.instance.levelComplete("stop");
+        SoundManager.instance.GameOver("stop");
     }
 
     public int GetLives()

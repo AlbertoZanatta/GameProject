@@ -105,4 +105,18 @@ public class SoundManager : MonoBehaviour {
         message.AddValue(OSCValue.Float(secondParam));
         transmitter.Send(message);
     }
+
+    public void levelComplete(string mode)
+    {
+        var message = new OSCMessage( "/levelComplete" );
+        message.AddValue( OSCValue.String(mode) );
+        transmitter.Send(message);
+    }
+
+    public void GameOver(string mode)
+    {
+        var message = new OSCMessage( "/gameover" );
+        message.AddValue( OSCValue.String(mode) );
+        transmitter.Send(message);
+    }
 }
