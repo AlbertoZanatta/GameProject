@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224181746439695326}
   - component: {fileID: 222757420587725874}
   - component: {fileID: 114892774943089284}
+  - component: {fileID: 114316301562551282}
   m_Layer: 5
   m_Name: ButtonInstructions
   m_TagString: Untagged
@@ -147,6 +148,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Back
+--- !u!114 &114316301562551282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090094797165892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696d789ee44710746ba0d11464d349d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenId: ButtonInstructions_Screen
+  OptionOne: {fileID: 0}
 --- !u!114 &114355113388677554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,8 +192,8 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 'Up, Down, Left, Right Arrows
+    m_LineSpacing: 0.7
+  m_Text: 'Arrows
 
 
     Spacebar
@@ -191,10 +205,7 @@ MonoBehaviour:
     Left Shift
 
 
-    1, 2, 3, 4
-
-
-    E'
+    1, 2, 3, 4'
 --- !u!114 &114403253765376332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,7 +237,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 0.7
   m_Text: 'Movement
 
 
@@ -239,10 +250,9 @@ MonoBehaviour:
     Shield Block
 
 
-    Select item
+    Use item
 
-
-    Use'
+'
 --- !u!114 &114558211155459932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -368,7 +378,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114558211155459932}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: ShowMainMenuScreens
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!222 &222056320676189072
@@ -428,7 +449,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 60.3, y: -22.4}
+  m_AnchoredPosition: {x: 60.3, y: -29}
   m_SizeDelta: {x: 160, y: 142.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224181746439695326
@@ -469,7 +490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.7, y: -67.92}
+  m_AnchoredPosition: {x: -5, y: -54}
   m_SizeDelta: {x: 76.44, y: 14.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224740171565782424
@@ -487,7 +508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 54.9}
+  m_AnchoredPosition: {x: -12, y: 50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224849749351374564
@@ -523,6 +544,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -30.800001, y: -22.4}
+  m_AnchoredPosition: {x: -30.800001, y: -29}
   m_SizeDelta: {x: 160, y: 142.29}
   m_Pivot: {x: 0.5, y: 0.5}
