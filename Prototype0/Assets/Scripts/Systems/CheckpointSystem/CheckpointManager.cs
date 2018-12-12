@@ -31,12 +31,12 @@ public class CheckpointManager : MonoBehaviour {
 
     private void Start()
     {
-       
+        PlayerController.Instance.playerDead += Instance_playerDead;
     }
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
-        PlayerController.Instance.playerDead += Instance_playerDead;
+        
     }
 
     private void OnDisable()

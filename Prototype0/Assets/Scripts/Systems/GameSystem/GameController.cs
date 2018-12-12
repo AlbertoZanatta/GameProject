@@ -13,7 +13,8 @@ public class GameController : MonoBehaviour {
     public bool facingRight = true;
     public bool levelForward;
     int killedEnemies = 0;
-    int lives = 100;
+    int maxLives = 5;
+    int lives = 5;
     int score;
     Vector3 beginLevelPos;
 
@@ -40,7 +41,7 @@ public class GameController : MonoBehaviour {
         PlayerController.Instance.coinsCollected += Instance_coinsCollected;
         PlayerController.Instance.playerDead += Instance_playerDead;
         PlayerController.Instance.flagCollected += Instance_flagCollected;
-	}
+    }
 
     private void OnEnable()
     {
@@ -115,7 +116,7 @@ public class GameController : MonoBehaviour {
         scoreText.text = lives.ToString();
         if(lives == 0)
         {
-            lives = 2;
+            lives = maxLives;
             scoreText.text = lives.ToString();
             GameOver();
         }
