@@ -63,6 +63,11 @@ public abstract class EnemyState : Character, Damageable {
         }
     }
 
+    public bool OnGround
+    {
+        get; set;
+    }
+
 
 
     // Use this for initialization
@@ -73,6 +78,7 @@ public abstract class EnemyState : Character, Damageable {
         ChangeState(stateMachine.idleState); // now the enemy is in Idle State
         //Debug.Log("current state: " + currentState);
         IsAttacking = false;
+        OnGround = true;
     }
 
 	// Update is called once per frame

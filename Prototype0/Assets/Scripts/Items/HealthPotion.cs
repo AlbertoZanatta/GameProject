@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [CreateAssetMenu()]
 public class HealthPotion : IInventoryItem
 {
-    public int regain = 1;
+    public int regain = 3;
     public override void OnDrop()
     {
         
@@ -15,8 +15,7 @@ public class HealthPotion : IInventoryItem
 
     public override void OnPickUp()
     {
-        //collectText.ShowText();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public override void OnUse(Character character)

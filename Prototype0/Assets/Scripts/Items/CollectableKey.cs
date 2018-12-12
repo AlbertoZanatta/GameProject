@@ -11,7 +11,7 @@ public class CollectableKey : IInventoryItem {
 
     public override void OnPickUp()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public override void OnUse(Character character)

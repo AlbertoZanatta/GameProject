@@ -391,6 +391,7 @@ MonoBehaviour:
     m_Bits: 512
   meleeRange: 2
   throwRange: 8
+  overlapDist: 0.5
   fireballPrefab: {fileID: 1516346901978168, guid: b6371c9f445e7d2449db3c32ba957e1a,
     type: 2}
   keepDistance: 6
@@ -419,7 +420,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootObjects:
-  - dropPrefab: {fileID: 0}
+  - dropPrefab: {fileID: 1444061045762784, guid: 0ef2d16bba22e1c49b5436b2a082abda,
+      type: 2}
     dropOdds: 1
   - dropPrefab: {fileID: 1298759771076850, guid: 081890a259aa4934ca4706d7ff7416b3,
       type: 2}
