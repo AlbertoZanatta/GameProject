@@ -26,7 +26,13 @@ public class IceBlock : MonoBehaviour, Damageable {
         currentHealthPoints--;
         if(currentHealthPoints <= 0)
         {
-            Destroy(gameObject);
+            //Do a couple of thnigs for the respawning part
+            //Change the current sprite
+            spriteRenderer.sprite = brokenSteps[0];
+            //Restore health points
+            currentHealthPoints = healthPoints;
+
+            gameObject.SetActive(false);
         }
         else
         {

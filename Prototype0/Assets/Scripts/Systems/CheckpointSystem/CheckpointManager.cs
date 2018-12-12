@@ -51,7 +51,11 @@ public class CheckpointManager : MonoBehaviour {
         {
             foreach (RespawnController respawnable in respawnables)
             {
-                respawnable.OnRespawn();
+                if(respawnable != null)
+                {
+                    respawnable.OnRespawn();
+                }
+                
             }
 
             playerRespawn.OnRespawn();

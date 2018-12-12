@@ -55,4 +55,9 @@ public class Door : MonoBehaviour {
             Close();
         }
     }
+
+    private void OnDisable()
+    {
+        SoundManager.instance.Drums(float.PositiveInfinity);
+    }
 }

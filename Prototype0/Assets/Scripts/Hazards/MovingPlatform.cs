@@ -89,4 +89,20 @@ public class MovingPlatform : MonoBehaviour {
 		}
 	}
 
+    public void Reset()
+    {
+        posA = child.localPosition;
+        posB = transformB.localPosition;
+        if (transformC != null)
+        {
+            posC = transformC.localPosition;
+        }
+        if (transformD != null)
+        {
+            posD = transformD.localPosition;
+        }
+
+        nextPos = posB;
+    }
+
 }

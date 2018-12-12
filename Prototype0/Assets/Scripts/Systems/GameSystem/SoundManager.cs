@@ -11,6 +11,16 @@ public class SoundManager : MonoBehaviour {
 
     public float firstWaterfall;
     public float secondWaterfall;
+
+    public void Fall(string mode)
+    {
+        var message = new OSCMessage("/fall");
+        message.AddValue(OSCValue.String(mode));
+        transmitter.Send(message);
+    }
+
+    public float maxWaterfalls = 8;
+
     public float caveDrums;
 
     private bool drumsActivated = false; //to avoid playing drums again
@@ -46,20 +56,19 @@ public class SoundManager : MonoBehaviour {
                 transmitter.Send(messageAct);
             }
 
-            float volume = ((distance - 35) * 1f) / -35;
+            float volume = ((distance - caveDrums) * 1f) / -caveDrums;
             var message = new OSCMessage("/drumsvolume");
             message.AddValue(OSCValue.Float(volume));
             transmitter.Send(message);
         }
        else
         {
-            if(drumsActivated)
-            {
+           
                 drumsActivated = false;
                 var messageAct = new OSCMessage("/drums");
                 messageAct.AddValue(OSCValue.Int(0));
                 transmitter.Send(messageAct);
-            } 
+          
         }
     }
 
@@ -94,16 +103,20 @@ public class SoundManager : MonoBehaviour {
 
     public void Waterfall(float playerDistance, int numWaterfall)
     {
-        
-        var message = new OSCMessage("/waterfall" + numWaterfall);
-        float firstWaterfall = ((playerDistance - 15) * 0.5f) / -15;
-        float secondWaterfall = ((playerDistance - 10) * 0.3f) / -10;
-        float firstParam = firstWaterfall >= 0 ? firstWaterfall : 0;
-        float secondParam = secondWaterfall >= 0 ? secondWaterfall : 0;
+        if(numWaterfall <= maxWaterfalls)
+        {
+            var message = new OSCMessage("/waterfall");
+            float fWaterfall = ((playerDistance - firstWaterfall) * 0.5f) / -firstWaterfall;
+            float sWaterfall = ((playerDistance - secondWaterfall) * 0.3f) / -secondWaterfall;
+            float firstParam = fWaterfall >= 0 ? fWaterfall : 0;
+            float secondParam = sWaterfall >= 0 ? sWaterfall : 0;
+            string routeParam = "waterfall" + numWaterfall;
 
-        message.AddValue(OSCValue.Float(firstParam));
-        message.AddValue(OSCValue.Float(secondParam));
-        transmitter.Send(message);
+            message.AddValue(OSCValue.String(routeParam));
+            message.AddValue(OSCValue.Float(firstParam));
+            message.AddValue(OSCValue.Float(secondParam));
+            transmitter.Send(message);
+        } 
     }
 
     public void levelComplete(string mode)

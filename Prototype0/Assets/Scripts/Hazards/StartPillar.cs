@@ -6,7 +6,7 @@ public class StartPillar : MonoBehaviour {
 
     public MovingPillar pillar;
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         pillar.enabled = true;
     }

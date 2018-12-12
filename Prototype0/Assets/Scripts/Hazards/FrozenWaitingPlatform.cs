@@ -43,4 +43,15 @@ public class FrozenWaitingPlatform : MonoBehaviour, Damageable
             frozen = false;
         }
     }
+
+    public void Reset()
+    {
+        spriteRenderer.color = Color.cyan;
+        frozen = true;
+        if(movingScript != null)
+        {
+            movingScript.enabled = false;
+        }
+        boxCollider.enabled = true;
+    }
 }

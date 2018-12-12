@@ -2148,8 +2148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transmitter: {fileID: 693933525}
-  firstWaterfall: 10
-  secondWaterfall: 5
+  firstWaterfall: 15
+  secondWaterfall: 7
+  maxWaterfalls: 9
   caveDrums: 35
 --- !u!114 &693933525
 MonoBehaviour:
@@ -4958,10 +4959,7 @@ Prefab:
         Shield Block
 
 
-        Select item
-
-
-        Use'
+        Use item'
       objectReference: {fileID: 0}
     - target: {fileID: 114403253765376332, guid: ba4bad1374e17504a89f926495d9eb07,
         type: 2}
@@ -5008,10 +5006,7 @@ Prefab:
         Left Shift
 
 
-        1, 2, 3, 4
-
-
-        E'
+        1, 2, 3, 4'
       objectReference: {fileID: 0}
     - target: {fileID: 1090094797165892, guid: ba4bad1374e17504a89f926495d9eb07, type: 2}
       propertyPath: m_IsActive

@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 212826451943547956}
   - component: {fileID: 114070049931855890}
   - component: {fileID: 61778038151203958}
-  m_Layer: 0
+  - component: {fileID: 114669024367047888}
+  m_Layer: 8
   m_Name: IceBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,6 +84,17 @@ MonoBehaviour:
   - {fileID: 21300002, guid: 06eceb1ef7ccc304fb05336c178faa75, type: 3}
   - {fileID: 21300004, guid: 06eceb1ef7ccc304fb05336c178faa75, type: 3}
   healthPoints: 0
+--- !u!114 &114669024367047888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388309950153482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f086363c91206248b7b32dd5a77d462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212826451943547956
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -118,7 +130,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f470a19d20e0b2408ee8f79638d8b5c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 06eceb1ef7ccc304fb05336c178faa75, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

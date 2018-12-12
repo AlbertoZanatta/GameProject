@@ -17,7 +17,6 @@ public class BreakableIceBlock : MonoBehaviour {
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         healthPoints = brokenSteps.Length;
-        Debug.Log("Health points: " + healthPoints + ", array length: " + brokenSteps.Length);
         currentHealthPoints = healthPoints;
         spriteRenderer.sprite = brokenSteps[healthPoints - currentHealthPoints];
     }
@@ -36,7 +35,8 @@ public class BreakableIceBlock : MonoBehaviour {
         currentHealthPoints--;
         if (currentHealthPoints <= 0)
         {
-            Destroy(gameObject);
+           
+            gameObject.SetActive(false);
         }
         else
         {
@@ -44,4 +44,12 @@ public class BreakableIceBlock : MonoBehaviour {
             spriteRenderer.sprite = brokenSteps[healthPoints - currentHealthPoints];
         }
     }
+
+    public void Reset()
+    {
+        timeElapsed = 0;
+        currentHealthPoints = healthPoints;
+        spriteRenderer.sprite = brokenSteps[0];
+    }
+
 }

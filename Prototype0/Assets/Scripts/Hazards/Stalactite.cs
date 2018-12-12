@@ -51,7 +51,8 @@ public class Stalactite : MonoBehaviour {
     {
         if(collision.gameObject.tag == "Ground")
         {
-            //Destroy(gameObject);
+            gameObject.SetActive(false);
+            rigidBody.gravityScale = 0;
             return;
         }
 
