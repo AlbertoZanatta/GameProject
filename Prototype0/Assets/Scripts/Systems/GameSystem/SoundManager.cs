@@ -12,6 +12,12 @@ public class SoundManager : MonoBehaviour {
     public float firstWaterfall;
     public float secondWaterfall;
 
+    private int coinSound = 850;
+    private float lastCollected;
+    [SerializeField]
+    private float coinTimeFrame = 2;
+
+
     public void Fall(string mode)
     {
         var message = new OSCMessage("/fall");
@@ -43,6 +49,11 @@ public class SoundManager : MonoBehaviour {
 
     }
 
+    private void Update()
+    {
+        lastCollected += Time.deltaTime;
+    }
+
     public void Drums(float distance)
     {
        if(distance <= caveDrums)
@@ -70,6 +81,26 @@ public class SoundManager : MonoBehaviour {
                 transmitter.Send(messageAct);
           
         }
+    }
+
+    public void EarnCoin()
+    {
+        if (lastCollected <= coinTimeFrame)
+        {
+            if (coinSound <= 1000)
+            {
+                coinSound += 50;
+            }
+        }
+        else
+        {
+            coinSound = 850;
+        }
+        lastCollected = 0;
+
+        var message = new OSCMessage("/earnCoin");
+        message.AddValue(OSCValue.Int(coinSound));
+        transmitter.Send(message);
     }
 
     public void Hit(string mode)

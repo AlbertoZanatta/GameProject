@@ -44,6 +44,7 @@ public class CollectableCoin : MonoBehaviour {
     {
         if(collision.tag == "Player")
         {
+            SoundManager.instance.EarnCoin();
             Destroy(gameObject);
         }
     }
