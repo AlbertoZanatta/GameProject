@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [CreateAssetMenu()]
 public class HealthPotion : IInventoryItem
 {
-    public int regain = 3;
+    public int regain = 5;
     public override void OnDrop()
     {
         

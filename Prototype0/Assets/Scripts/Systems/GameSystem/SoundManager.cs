@@ -8,9 +8,15 @@ public class SoundManager : MonoBehaviour {
 
     public OSCTransmitter transmitter;
     public static SoundManager instance;
-
+    
     public float firstWaterfall;
     public float secondWaterfall;
+    public float maxWaterfalls = 8;
+
+    //Torch sounds
+    public float flameDist = 3f;
+    public float creakingsDist = 1.5f;
+    public int maxTorches = 7;
 
     public void Fall(string mode)
     {
@@ -19,7 +25,24 @@ public class SoundManager : MonoBehaviour {
         transmitter.Send(message);
     }
 
-    public float maxWaterfalls = 8;
+    public void Torch(float playerDistance, int numTorch)
+    {
+        if(numTorch >= maxTorches)
+        {
+            var message = new OSCMessage("/fire");
+            float flame = ((playerDistance - flameDist)) * 0.6f / -flameDist;
+            float creaking = ((playerDistance - creakingsDist)) * 0.4f / -creakingsDist;
+            flame = flame >= 0 ? flame : 0;
+            creaking = creaking >= 0 ? creaking : 0;
+            Debug.Log("Player dist: " + playerDistance + ", flame intensity: " + flame + ", creaking intensity: " + creaking);
+
+            message.AddValue(OSCValue.Float(flame));
+            message.AddValue(OSCValue.Float(creaking));
+            transmitter.Send(message);
+        } 
+    }
+
+
 
     public float caveDrums;
 

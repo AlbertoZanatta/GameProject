@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212819057473378080}
   - component: {fileID: 95205456980829212}
   - component: {fileID: 108256180860125056}
+  - component: {fileID: 114203456733563440}
   m_Layer: 0
   m_Name: Torch
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1757492416560624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200.77, y: -224.62, z: -2}
+  m_LocalPosition: {x: 201.73, y: -224.62, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,6 +98,17 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114203456733563440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1757492416560624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 812625730c26a494d88891ca92991ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212819057473378080
 SpriteRenderer:
   m_ObjectHideFlags: 1

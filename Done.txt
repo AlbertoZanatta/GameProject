@@ -7,11 +7,24 @@ Things done:
 - Added lights and torches (better atmosphere)
 - Changed control in Respawn to reposition the facing direction of the player so to make it correct
 - Fixed enemy (MeleeStateEnemy) that checked the ground too deeply
+- Level selection
+- Lives system
 
 
 _____
 TO DO:
-- Life system
 - Player cannot use the key before opening the door
 - What about the flag in the inventory?
-- Level selection
+- Replace the traps in the first part of the first level with the more difficult ones
+- Too much speed when first enetring the ice plane
+- Refill until mid health if the respawn is with too little health
+- Revise the layout of the level so to match
+- Fix the respawn of the vulcano trap
+- Make boss enemy
+- Coins as a way to regain lives
+- Get the opportunity to go to last checkpoint (if stuck)
+- Make the breakble ice breakable by fireballs
+- Insert doors lava level / end ice level that can be opened with keys
+- Make it impossible to use the key and the flag
+- Make the pause menu consistent;
+- Adjust backgrounds and sprites for the levels

@@ -31,7 +31,12 @@
                                         more interesting enemy behaviour - enemies attack the player from behind if
                                         he comes too close. But lso a strange 'back and forth' movement in certain situations
                                         that still we were not able to fix.
-                                        
+
+
+
+
+    //Incremented health potion's regain
+    //Place other health potions around                                    
 					
 - Getti di lava
 - Spike che scompaiono alla prima volta
@@ -45,6 +50,23 @@
 - Tutorial during first way on first level
 - Breakable turrets (?)
 - Bordi alla mappa
+- Button highlighted main menu (?)
+- Lupo scemo
+- Collectables (trigger quando cade sul terreno)
+- Tile (problema state machine)
+- Sincro : piattaforme jimping part e piattaforma dopo cascate di lava
+- Too long jump on the left of first platform allows to bypass the death line
+- GameController returns one life less
+- Damage from high fall?
+- Making final enemy in the first level bigger
+
+//THIRD PLAY SESSION
+- Change keys to perform parrying and attack (?)
+- Color of the lavafall (does not seem to damage)
+- First tile jumping part lava level hit even while parrying
+- Lava jumping part: synch platforms
+- Witches always have to drop loot because they are difficult to kill and this encourages the player to kill them. Otherwise player will skip
+-
 
 //As we found that combat was not very engaging and for the most part people would rush through the enemies
  in order to reach their final goal, we tried to change our approach in designing the levels for the two later

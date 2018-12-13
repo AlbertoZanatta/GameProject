@@ -104,8 +104,7 @@ MonoBehaviour:
   itemName: HealthPotion
   itemImage: {fileID: 21300034, guid: 07e601f21464b2c499d51d4665473bfb, type: 3}
   enemyDropped: 0
-  sprite: {fileID: 21300034, guid: 07e601f21464b2c499d51d4665473bfb, type: 3}
-  regain: 1
+  regain: 3
 --- !u!212 &212415763930796136
 SpriteRenderer:
   m_ObjectHideFlags: 1
