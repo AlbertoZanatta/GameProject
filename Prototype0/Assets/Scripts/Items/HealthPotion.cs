@@ -20,6 +20,7 @@ public class HealthPotion : IInventoryItem
 
     public override void OnUse(Character character)
     {
+        SoundManager.instance.DrinkPotion();
         character.Health.ChangeHealth(regain);
     }
 }

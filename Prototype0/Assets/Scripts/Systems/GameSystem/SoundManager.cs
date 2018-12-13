@@ -25,6 +25,20 @@ public class SoundManager : MonoBehaviour {
         transmitter.Send(message);
     }
 
+    public void ThrowKnife()
+    {
+        var message = new OSCMessage("/knife");
+        message.AddValue(OSCValue.Int(1));
+        transmitter.Send(message);
+    }
+
+    public void DrinkPotion()
+    {
+        var message = new OSCMessage("/potion");
+        message.AddValue(OSCValue.Int(400));
+        transmitter.Send(message);
+    }
+
     public float maxWaterfalls = 8;
 
     public float caveDrums;

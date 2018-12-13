@@ -45,6 +45,8 @@ public class Turret : MonoBehaviour {
     {
         GameObject tmp = (GameObject)Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
         Throwable script = tmp.GetComponent<Throwable>();
+        SoundManager.instance.ThrowKnife();
+
         if (script != null)
         {
             if (collider.offset.x < 0f)
