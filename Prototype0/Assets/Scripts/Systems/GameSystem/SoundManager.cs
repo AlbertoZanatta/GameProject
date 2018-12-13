@@ -18,6 +18,12 @@ public class SoundManager : MonoBehaviour {
     public float creakingsDist = 1.5f;
     public int maxTorches = 7;
 
+    private int coinSound = 850;
+    private float lastCollected;
+    [SerializeField]
+    private float coinTimeFrame = 2;
+
+
     public void Fall(string mode)
     {
         var message = new OSCMessage("/fall");
@@ -41,7 +47,19 @@ public class SoundManager : MonoBehaviour {
             transmitter.Send(message);
         } 
     }
+    public void ThrowKnife()
+    {
+        var message = new OSCMessage("/knife");
+        message.AddValue(OSCValue.Int(1));
+        transmitter.Send(message);
+    }
 
+    public void DrinkPotion()
+    {
+        var message = new OSCMessage("/potion");
+        message.AddValue(OSCValue.Int(400));
+        transmitter.Send(message);
+    }
 
 
     public float caveDrums;
@@ -64,6 +82,11 @@ public class SoundManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
+    }
+
+    private void Update()
+    {
+        lastCollected += Time.deltaTime;
     }
 
     public void Drums(float distance)
@@ -93,6 +116,26 @@ public class SoundManager : MonoBehaviour {
                 transmitter.Send(messageAct);
           
         }
+    }
+
+    public void EarnCoin()
+    {
+        if (lastCollected <= coinTimeFrame)
+        {
+            if (coinSound <= 1000)
+            {
+                coinSound += 50;
+            }
+        }
+        else
+        {
+            coinSound = 850;
+        }
+        lastCollected = 0;
+
+        var message = new OSCMessage("/earnCoin");
+        message.AddValue(OSCValue.Int(coinSound));
+        transmitter.Send(message);
     }
 
     public void Hit(string mode)

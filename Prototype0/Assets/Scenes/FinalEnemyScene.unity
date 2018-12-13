@@ -157,6 +157,11 @@ Prefab:
       propertyPath: parrySlider
       value: 
       objectReference: {fileID: 1614876435}
+    - target: {fileID: 114786804562105544, guid: 39b0cc115cd2d254eae1b17b8b0c792a,
+        type: 2}
+      propertyPath: groundDetection
+      value: 
+      objectReference: {fileID: 1235549445}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39b0cc115cd2d254eae1b17b8b0c792a, type: 2}
   m_IsPrefabAsset: 0
@@ -166,6 +171,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 43589942}
   m_Script: {fileID: 11500000, guid: 24976cf1d67caa544ab0df94182f62b8, type: 3}
+--- !u!4 &43589944 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4751661502778404, guid: 39b0cc115cd2d254eae1b17b8b0c792a,
+    type: 2}
+  m_PrefabInternal: {fileID: 43589942}
 --- !u!1 &52328167
 GameObject:
   m_ObjectHideFlags: 0
@@ -5097,6 +5107,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1235549444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1235549445}
+  m_Layer: 10
+  m_Name: GroundDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1235549445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1235549444}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.04, y: -0.36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 43589944}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1239823395
 GameObject:
   m_ObjectHideFlags: 0
@@ -8563,6 +8601,10 @@ MonoBehaviour:
   firstWaterfall: 15
   secondWaterfall: 7
   maxWaterfalls: 9
+  flameDist: 3
+  creakingsDist: 1.5
+  maxTorches: 7
+  coinTimeFrame: 2
   caveDrums: 35
 --- !u!114 &1873913414
 MonoBehaviour:

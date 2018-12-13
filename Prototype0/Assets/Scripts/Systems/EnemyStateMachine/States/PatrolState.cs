@@ -39,7 +39,6 @@ public class PatrolState : IEnemyState
             }
 
         }
-        Debug.Log("Moving in patrolling! Target is " + enemy.Target);
         enemy.Move(); //Move the enemy in the current direction
 
         if (enemy.Target != null && enemy.InThrowRange) //Change to Ranged state if player has been detected and is in range

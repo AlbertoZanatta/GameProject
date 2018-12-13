@@ -59,7 +59,7 @@ public class PlayerController : Character, Damageable
     //Detecting ground
     public LayerMask groundMask; //for detecting ground in function IsGrounded()
     private float distToGround;  //fordetecting ground too
-
+    public Transform groundDetection;
     //private boolean to control player 'invincibility' moments
     private bool canBeHit = true;
     private void Awake()
@@ -159,7 +159,10 @@ public class PlayerController : Character, Damageable
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, groundMask);
+        RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector3.down, 0.3f, groundMask); 
+        Vector3 down = transform.TransformDirection(Vector3.down) * 0.3f;
+        Debug.DrawRay(groundDetection.position, down, Color.green);
+
         return hit.collider != null;
     }
 
