@@ -11,12 +11,20 @@ public class MoveWithplayer : MonoBehaviour {
         moveScript.enabled = false;
 	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Player collided with waiting platform");
         if(collision.gameObject.tag == "Player")
         {
-            Debug.Log("Player on platform!");
             moveScript.enabled = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            moveScript.enabled = false;
         }
     }
 }

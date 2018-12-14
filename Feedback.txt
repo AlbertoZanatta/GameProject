@@ -42,31 +42,28 @@
 - Spike che scompaiono alla prima volta
 - Ice blocks not destructible
 - Color of background a bit different
-- Attack - match cooldown time with animation
+- Attack - match cooldown time with animation ##
 - Visual indication of impaired movement
 - Fewer tiles in the breakable falls
 - Check breakable ice section
 - Improve stalactites placement
-- Tutorial during first way on first level
 - Breakable turrets (?)
 - Bordi alla mappa
 - Button highlighted main menu (?)
-- Lupo scemo
 - Collectables (trigger quando cade sul terreno)
 - Tile (problema state machine)
 - Sincro : piattaforme jimping part e piattaforma dopo cascate di lava
 - Too long jump on the left of first platform allows to bypass the death line
-- GameController returns one life less
+- GameController returns one life less ##
 - Damage from high fall?
-- Making final enemy in the first level bigger
+- Making final enemy in the first level bigger ##
 
 //THIRD PLAY SESSION
-- Change keys to perform parrying and attack (?)
 - Color of the lavafall (does not seem to damage)
 - First tile jumping part lava level hit even while parrying
 - Lava jumping part: synch platforms
 - Witches always have to drop loot because they are difficult to kill and this encourages the player to kill them. Otherwise player will skip
--
+- Game controller respawns with one life less ##
 
 //As we found that combat was not very engaging and for the most part people would rush through the enemies
  in order to reach their final goal, we tried to change our approach in designing the levels for the two later
@@ -86,3 +83,26 @@ LEVEL2
 //Added a new checkpoint at the top of the vulcano, so that the player can be respawned there if he dies in the final battle
 //Door
 //Dynamically create level beginning for levelBack
+
+
+
+BUGFIXING:
+- Fixed camera;
+- Fixed Enemy Melee prefab;
+- Respawning (checkpoint positions were not initialized; after the fix, player wouldn't be respawned
+  as his last known position is beyound the checkpoint itself);
+- Fixed not aligned number in inventory 
+- Added lights and torches (better atmosphere)
+- Changed control in Respawn to reposition the facing direction of the player so to make it correct
+- Fixed enemy (MeleeStateEnemy) that checked the ground too deeply
+- Level selection
+- Lives system
+- Add exit game button in main menu
+- Fixed controls menu not showing nd game time frozen when pause the game and return to main menu
+- Reworked the control system
+- Improved navigation through the different menus allowing for the use of arrows
+- Fixed problem that player goes through ground when respawning
+- Fixed the fact that collectable objects can be moved by enemies
+
+OTHER THINGS:
+- Choose a name for the game!!

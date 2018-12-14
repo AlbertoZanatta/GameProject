@@ -6,16 +6,22 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour { 
-    public Text scoreText;
+    public Text livesText;
+    public Text pointsText;
     public GameObject player;
 
     public bool hasFlag = false;
     public bool facingRight = true;
     public bool levelForward;
     int killedEnemies = 0;
-    int maxLives = 5;
+
+    int maxLives = 3;
     int lives = 5;
-    int score;
+
+  
+    int coinsCollected;
+    int points;
+    [SerializeField] int pointsForLife = 10; 
     Vector3 beginLevelPos;
 
     public static GameController instance;
@@ -66,7 +72,9 @@ public class GameController : MonoBehaviour {
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        scoreText.text = lives.ToString();
+        lives = maxLives;
+        livesText.text = lives.ToString();
+        Debug.Log("Lives set to : " + lives);
 
         if (scene.name.Contains("Back"))
         {
@@ -113,11 +121,11 @@ public class GameController : MonoBehaviour {
     private void Instance_playerDead(object sender, PlayerDeadArgs e)
     {
         lives--;
-        scoreText.text = lives.ToString();
+        livesText.text = lives.ToString();
         if(lives == 0)
         {
-            lives = maxLives;
-            scoreText.text = lives.ToString();
+            
+            livesText.text = lives.ToString();
             GameOver();
         }
     }
@@ -130,8 +138,16 @@ public class GameController : MonoBehaviour {
 
     private void Instance_coinsCollected(object sender, CollectedCoinArgs e)
     {
-        score += 10;
-        
+        coinsCollected += 1;
+        points += 1;
+        if(points == pointsForLife)
+        {
+            lives++;
+            livesText.text = lives.ToString();
+            points = 0;
+        }
+        pointsText.text = points.ToString();
+
     }
 
     public void FinishLevel()

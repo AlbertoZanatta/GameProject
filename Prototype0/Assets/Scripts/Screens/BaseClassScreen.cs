@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class BaseClassScreen : MonoBehaviour {
 
+   
+
     [SerializeField] private string screenId;
     public string ScreenId { get { return screenId; } }
-    public GameObject OptionOne;
     public static ScreenManager manager;
 
-
-    
+    public Button firstButton;
 
     protected EventSystem eventSystem
     {
@@ -23,16 +24,13 @@ public class BaseClassScreen : MonoBehaviour {
         gameObject.SetActive(show);
     }
 
-
-    public void PassSelectedItem()
-    {
-        eventSystem.SetSelectedGameObject(OptionOne);
-    }
-
     public virtual void OpenWindow()
     {
         ShowWindow(true);
-        PassSelectedItem();
+        if(firstButton != null)
+        {
+            firstButton.Select();
+        } 
     }
 
     public virtual void CloseWindow()

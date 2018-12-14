@@ -10,8 +10,13 @@ public abstract class IInventoryItem: MonoBehaviour
     public Sprite itemImage;
     public bool enemyDropped = false;
 
-    private void OnEnable()
+    private Collider2D collider;
+    private Rigidbody2D rigidbody;
+
+    private void Start()
     {
+        collider = gameObject.GetComponent<Collider2D>();
+        rigidbody = gameObject.GetComponent<Rigidbody2D>();
         PlayerController.Instance.playerDead += Instance_playerDead;
     }
 
@@ -25,6 +30,15 @@ public abstract class IInventoryItem: MonoBehaviour
         if(enemyDropped)
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            collider.isTrigger = true;
+            rigidbody.gravityScale = 0;
         }
     }
 

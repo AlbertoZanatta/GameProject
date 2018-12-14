@@ -66,7 +66,7 @@ public class Turret : MonoBehaviour {
         if(collision.tag == "Player")
         {
             playerDetected = true;
-            Debug.Log("PlayerDetected");
+            //Debug.Log("PlayerDetected");
         }
     }
 

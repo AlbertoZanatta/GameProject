@@ -13,11 +13,13 @@ public class PauseMenu : MonoBehaviour {
 
     public void ReturnToMenu()
     {
+        Time.timeScale = 1f;
         GameController.instance.GoToMainMenu();
     }
 
     public void ExitGame()
     {
+        Time.timeScale = 1f;
         Application.Quit();
     }
 }

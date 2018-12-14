@@ -12,7 +12,7 @@ public class PlayerRespawnController : RespawnController{
     {
         //Debug.Log("PlayerRespawn!");
         base.OnRespawn();
-        PlayerController.Instance.Health.SetHealth(healthPoints);
+        PlayerController.Instance.Health.Refill();
         if((GameController.instance.levelForward && PlayerController.Instance.transform.localScale.x < 0) || (!GameController.instance.levelForward && PlayerController.Instance.transform.localScale.x > 0))
         {
             Vector3 localScale = PlayerController.Instance.transform.localScale;
@@ -20,6 +20,7 @@ public class PlayerRespawnController : RespawnController{
             PlayerController.Instance.FacingRight = !PlayerController.Instance.FacingRight;
         }
         PlayerController.Instance.inventory.ResetInventory(copiedInventory);
+        PlayerController.Instance.characterRigidbody.velocity = Vector2.zero;
     }
 
     public void UpdateState()
@@ -27,7 +28,6 @@ public class PlayerRespawnController : RespawnController{
         //Debug.Log("Update state!");
         initialPosition = PlayerController.Instance.transform.position;
         healthPoints = PlayerController.Instance.Health.CurrentHealth;
-        copiedInventory = PlayerController.Instance.inventory.GetInventory();
-       
+        copiedInventory = PlayerController.Instance.inventory.GetInventory(); 
     }
 }

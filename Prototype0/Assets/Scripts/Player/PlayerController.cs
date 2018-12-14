@@ -272,27 +272,6 @@ public class PlayerController : Character, Damageable
         e.item.OnUse(this);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        GameObject colliding = collision.gameObject;
-
-        //Checking if it's a collectable item
-        IInventoryItem item = colliding.GetComponent<IInventoryItem>();
-        if (item != null)
-        {
-            inventory.AddItem(item);
-            if(item.itemName.Equals("Flag"))
-            {
-                if(flagCollected != null)
-                {
-                    flagCollected(this, new PlayerFlagArgs(transform.position, SceneManager.GetActiveScene().name));
-                }
-            }
-            return;
-        }
-
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Coin")
@@ -301,6 +280,25 @@ public class PlayerController : Character, Damageable
             if(coinsCollected != null)
             {
                 coinsCollected(this, new CollectedCoinArgs());
+            }
+        }
+        else
+        {
+            GameObject colliding = collision.gameObject;
+
+            //Checking if it's a collectable item
+            IInventoryItem item = colliding.GetComponent<IInventoryItem>();
+            if (item != null)
+            {
+                inventory.AddItem(item);
+                if (item.itemName.Equals("Flag"))
+                {
+                    if (flagCollected != null)
+                    {
+                        flagCollected(this, new PlayerFlagArgs(transform.position, SceneManager.GetActiveScene().name));
+                    }
+                }
+                return;
             }
         }
     }
