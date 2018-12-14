@@ -366,34 +366,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 74630521}
   m_CullTransparentMesh: 0
---- !u!1 &74747112
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 74747113}
-  m_Layer: 10
-  m_Name: GroundDetection
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &74747113
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 74747112}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.055, y: -0.328, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1968276658}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &77442434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,7 +1456,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &458436851
 GameObject:
@@ -2179,9 +2151,10 @@ MonoBehaviour:
   firstWaterfall: 15
   secondWaterfall: 7
   maxWaterfalls: 9
-  flameDist: 3
+  flameDist: 5
   creakingsDist: 1.5
   maxTorches: 7
+  coinTimeFrame: 2
   caveDrums: 35
 --- !u!114 &693933525
 MonoBehaviour:
@@ -3681,16 +3654,6 @@ Prefab:
       propertyPath: parrySlider
       value: 
       objectReference: {fileID: 1040856901}
-    - target: {fileID: 212635420498626756, guid: 39b0cc115cd2d254eae1b17b8b0c792a,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114786804562105544, guid: 39b0cc115cd2d254eae1b17b8b0c792a,
-        type: 2}
-      propertyPath: groundDetection
-      value: 
-      objectReference: {fileID: 74747113}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39b0cc115cd2d254eae1b17b8b0c792a, type: 2}
   m_IsPrefabAsset: 0
@@ -6453,7 +6416,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1965756804
 MonoBehaviour:
@@ -6472,23 +6435,6 @@ MonoBehaviour:
 --- !u!1 &1968276651 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1188871564764008, guid: 39b0cc115cd2d254eae1b17b8b0c792a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1176421493}
---- !u!114 &1968276652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1968276651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0365f85854ae41e4f918ca08fd9e06da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  copiedInventory: []
---- !u!4 &1968276658 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4751661502778404, guid: 39b0cc115cd2d254eae1b17b8b0c792a,
     type: 2}
   m_PrefabInternal: {fileID: 1176421493}
 --- !u!1 &1985369105

@@ -12,10 +12,11 @@ public class SoundManager : MonoBehaviour {
     public float firstWaterfall;
     public float secondWaterfall;
     public float maxWaterfalls = 8;
+    public bool inCave = false;
 
     //Torch sounds
-    public float flameDist = 3f;
-    public float creakingsDist = 1.5f;
+    public float flameDist = 5f;
+    public float creakingsDist = 2f;
     public int maxTorches = 7;
 
     private int coinSound = 850;
@@ -33,15 +34,17 @@ public class SoundManager : MonoBehaviour {
 
     public void Torch(float playerDistance, int numTorch)
     {
-        if(numTorch >= maxTorches)
+        if(numTorch <= maxTorches)
         {
             var message = new OSCMessage("/fire");
-            float flame = ((playerDistance - flameDist)) * 0.6f / -flameDist;
-            float creaking = ((playerDistance - creakingsDist)) * 0.4f / -creakingsDist;
+            float flame = ((playerDistance - flameDist)) * 0.5f / -flameDist;
+            float creaking = ((playerDistance - creakingsDist)) * 0.3f / -creakingsDist;
             flame = flame >= 0 ? flame : 0;
             creaking = creaking >= 0 ? creaking : 0;
-            Debug.Log("Player dist: " + playerDistance + ", flame intensity: " + flame + ", creaking intensity: " + creaking);
+            //Debug.Log("Player dist: " + playerDistance + ", flame intensity: " + flame + ", creaking intensity: " + creaking);
+            string routeParam = "torch" + numTorch;
 
+            message.AddValue(OSCValue.String(routeParam));
             message.AddValue(OSCValue.Float(flame));
             message.AddValue(OSCValue.Float(creaking));
             transmitter.Send(message);
@@ -142,6 +145,8 @@ public class SoundManager : MonoBehaviour {
     {
         var message = new OSCMessage("/hit");
         message.AddValue(OSCValue.String(mode));
+        string caveMode = inCave ? "in" : "out";
+        message.AddValue(OSCValue.String(caveMode));
         transmitter.Send(message);
     }
 

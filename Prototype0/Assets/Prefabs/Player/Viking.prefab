@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 50255702241221564}
   - component: {fileID: 70397592597782200}
   - component: {fileID: 114786804562105544}
+  - component: {fileID: 114793646044045602}
   m_Layer: 10
   m_Name: Viking
   m_TagString: Player
@@ -78,6 +79,21 @@ GameObject:
   m_Name: Shield
   m_TagString: Shield
   m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1651868795940486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4315705531954264}
+  m_Layer: 10
+  m_Name: GroundDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -155,14 +171,27 @@ Transform:
   m_Father: {fileID: 4751661502778404}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4315705531954264
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1651868795940486}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.055, y: -0.328, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4751661502778404}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4751661502778404
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1188871564764008}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.7, y: -14.7, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.94, y: -0.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4882523775173564}
@@ -171,6 +200,7 @@ Transform:
   - {fileID: 4102907497614934}
   - {fileID: 224319772039733970}
   - {fileID: 4302793482119544}
+  - {fileID: 4315705531954264}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -399,6 +429,19 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  groundDetection: {fileID: 4315705531954264}
+--- !u!114 &114793646044045602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1188871564764008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0365f85854ae41e4f918ca08fd9e06da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  copiedInventory: []
 --- !u!114 &114983253584933856
 MonoBehaviour:
   m_ObjectHideFlags: 1
