@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorRespawnController : RespawnController {
-
-    public Door door;
+    Door door;
+    private void Start()
+    {
+        door = gameObject.GetComponent<Door>();
+    }
 
     public override void OnRespawn()
     {
         base.OnRespawn();
-        door.Close();
+        if(door != null)
+        {
+            door.Close();
+        }    
     }
 
 }

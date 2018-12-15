@@ -103,6 +103,7 @@ MonoBehaviour:
   itemName: Level_Key
   itemImage: {fileID: 21300052, guid: 07e601f21464b2c499d51d4665473bfb, type: 3}
   enemyDropped: 0
+  isSpecial: 1
 --- !u!114 &114544989098597662
 MonoBehaviour:
   m_ObjectHideFlags: 1

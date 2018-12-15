@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour {
     public event EventHandler<InventoryEventArgs> itemRemoved;
     public event EventHandler<InventoryEventArgs> itemUsed;
 
+    public static SpecialLock specialRequest = null;
     public List<ItemStack> mItems = new List<ItemStack>();
     
     
@@ -77,10 +78,32 @@ public class Inventory : MonoBehaviour {
 
     public void UseItem(IInventoryItem item)
     {
-        if(itemUsed != null)
+        if(!item.isSpecial)
         {
-            itemUsed(this, new InventoryEventArgs(item));
             RemoveItem(item);
+            if(itemUsed != null)
+            {
+                itemUsed(this, new InventoryEventArgs(item));
+            }
+                
+        }
+        else if(specialRequest != null)
+        {
+           
+            if(specialRequest != null) //There's the possibility to interact and use a special item
+            {
+
+                if (specialRequest.Key.Equals(item.itemName))
+                {
+                    specialRequest.Agree(item);
+                    RemoveItem(item);
+                    if (itemUsed != null)
+                    {
+                        itemUsed(this, new InventoryEventArgs(item));
+                    }
+                }
+                        
+            }
         }
     }
 

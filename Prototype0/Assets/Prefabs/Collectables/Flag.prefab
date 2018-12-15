@@ -92,6 +92,7 @@ MonoBehaviour:
   itemName: Flag
   itemImage: {fileID: 21300000, guid: a946d2fb6ab8c8c4b9e050d97582aad7, type: 3}
   enemyDropped: 0
+  isSpecial: 1
 --- !u!212 &212356911774674184
 SpriteRenderer:
   m_ObjectHideFlags: 1

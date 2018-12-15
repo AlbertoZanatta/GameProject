@@ -84,10 +84,15 @@ public class InventoryHUD : MonoBehaviour{
             if (Input.GetKeyDown("" + i))
             {
                 int selectedSlot = i - 1;
-                inventory.UseItem(itemSlots[selectedSlot].Item);
+                if (!itemSlots[selectedSlot].ItemName.Equals(ItemSlotController.NONE))
+                {
+                    inventory.UseItem(itemSlots[selectedSlot].Item);
+                }
+               
 
             }
         }
+
         /*
         if(Input.GetButtonDown("Use"))
         {

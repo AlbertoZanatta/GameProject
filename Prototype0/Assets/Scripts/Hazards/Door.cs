@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour {
+public class Door : SpecialLock {
 
     public float playerDistance;
 
     public DoorColumn[] doorColumns;
-    private string item = "Level_Key";
 
-    public void Open()
+    public void OpenColumns()
     {
         foreach(DoorColumn column in doorColumns)
         {
@@ -25,8 +24,13 @@ public class Door : MonoBehaviour {
         SoundManager.instance.Drums(distance);
     }
 
+    protected override void Open()
+    {
+        base.Open();
+        OpenColumns();
+    }
 
-    internal void Close()
+    public void CloseColumns()
     {
         foreach (DoorColumn column in doorColumns)
         {
@@ -34,30 +38,38 @@ public class Door : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerExit2D(Collider2D collision)
     {
-        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-        if (player != null)
+        base.OnTriggerExit2D(collision);
+        if(open)
         {
-            if (player.inventory.HasItem(item))
+            if (collision.gameObject.CompareTag("Player"))
             {
-                Open();
+                CloseColumns();
             }
-
-        }
+        }   
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-        if (player != null)
+        base.OnTriggerEnter2D(collision);
+        if (open)
         {
-            Close();
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                OpenColumns();
+            }
         }
     }
 
     private void OnDisable()
     {
         SoundManager.instance.Drums(float.PositiveInfinity);
+    }
+
+    public void Close()
+    {
+        CloseColumns();
+        open = false;
     }
 }

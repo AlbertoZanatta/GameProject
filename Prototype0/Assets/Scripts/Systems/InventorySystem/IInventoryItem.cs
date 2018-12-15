@@ -9,6 +9,7 @@ public abstract class IInventoryItem: MonoBehaviour
     public string itemName;
     public Sprite itemImage;
     public bool enemyDropped = false;
+    public bool isSpecial;
 
     private Collider2D collider;
     private Rigidbody2D rigidbody;

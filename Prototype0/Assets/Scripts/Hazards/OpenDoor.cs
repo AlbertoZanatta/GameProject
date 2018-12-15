@@ -13,7 +13,7 @@ public class OpenDoor : MonoBehaviour {
         {
             if(player.inventory.HasItem(item))
             {
-                door.Open();
+                door.OpenColumns();
             }
 
         }
@@ -24,7 +24,7 @@ public class OpenDoor : MonoBehaviour {
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if (player != null)
         {
-            door.Close();
+            door.CloseColumns();
         }
     }
 }
