@@ -17,13 +17,6 @@ public class Door : SpecialLock {
         }
     }
 
-    private void Update()
-    {
-        float distance = Mathf.Abs(Vector2.Distance(transform.position, PlayerController.Instance.transform.position));
-        playerDistance = distance;
-        SoundManager.instance.Drums(distance);
-    }
-
     protected override void Open()
     {
         base.Open();
@@ -60,11 +53,6 @@ public class Door : SpecialLock {
                 OpenColumns();
             }
         }
-    }
-
-    private void OnDisable()
-    {
-        SoundManager.instance.Drums(float.PositiveInfinity);
     }
 
     public void Close()

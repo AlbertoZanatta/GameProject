@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour {
 
             if (itemStacked != null)
             {
-                itemStacked(this, new InventoryStackEventArgs(item.itemName, found.Quantity));
+                itemStacked(this, new InventoryStackEventArgs(item.itemName, found.Quantity, true));
             }
 
             item.OnPickUp();
@@ -177,12 +177,22 @@ public class InventoryStackEventArgs : EventArgs
 {
     public string itemName;
     public int quantity;
+    public bool collected;
 
     public InventoryStackEventArgs(string itemName, int quantity)
     {
         this.itemName = itemName;
         this.quantity = quantity;
+        this.collected = false;
     }
+    public InventoryStackEventArgs(string itemName, int quantity, bool collected)
+    {
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.collected = collected;
+    }
+
+
 }
 [System.Serializable]
 public class ItemStack

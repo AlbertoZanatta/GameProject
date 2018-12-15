@@ -21,8 +21,11 @@ public class SoundManager : MonoBehaviour {
 
     private int coinSound = 850;
     private float lastCollected;
-    [SerializeField]
-    private float coinTimeFrame = 2;
+    [SerializeField] private float coinTimeFrame = 2;
+
+    private int collectedItems;
+    private Coroutine collectingCoroutine;
+    [SerializeField] private float collectItemDuration = 50;
 
 
     public void Fall(string mode)
@@ -87,6 +90,17 @@ public class SoundManager : MonoBehaviour {
 
     }
 
+    private void Start()
+    {
+        PlayerController.Instance.inventory.itemAdded += Inventory_itemAdded;
+        PlayerController.Instance.inventory.itemStacked += Inventory_itemStacked;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.Instance.inventory.itemAdded -= Inventory_itemAdded;
+    }
+
     private void Update()
     {
         lastCollected += Time.deltaTime;
@@ -119,6 +133,54 @@ public class SoundManager : MonoBehaviour {
                 transmitter.Send(messageAct);
           
         }
+    }
+
+    private void Inventory_itemAdded(object sender, InventoryEventArgs e)
+    {
+        if (collectingCoroutine == null)
+        {
+            collectingCoroutine = StartCoroutine(ListenForCollected(0.1f));
+        }
+        collectedItems++;
+  
+    }
+
+
+    private void Inventory_itemStacked(object sender, InventoryStackEventArgs e)
+    {
+        if(e.collected)
+        {
+            if(collectingCoroutine == null)
+            {
+                collectingCoroutine = StartCoroutine(ListenForCollected(0.1f));
+            }
+            collectedItems++;
+        }
+       
+    }
+
+
+    private IEnumerator ListenForCollected(float s)
+    {
+        yield return new WaitForSeconds(s);
+        Debug.Log("Starting sound");
+        CollectedSound(collectedItems);
+        collectedItems = 0;
+        collectingCoroutine = null;
+    }
+
+    private void CollectedSound(int collectedItems)
+    {
+        var message = new OSCMessage("/collect");
+        message.AddValue(OSCValue.Float(collectedItems));
+        message.AddValue(OSCValue.Float(100));
+        message.AddValue(OSCValue.Float(69 - collectedItems * 2));
+        transmitter.Send(message);
+    }
+
+    public void IncreaseCollected()
+    {
+        collectedItems++;
     }
 
     public void EarnCoin()

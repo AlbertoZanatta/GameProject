@@ -74,7 +74,7 @@ public class GameController : MonoBehaviour {
     {
         lives = maxLives;
         livesText.text = lives.ToString();
-        Debug.Log("Lives set to : " + lives);
+        //Debug.Log("Lives set to : " + lives);
 
         if (scene.name.Contains("Back"))
         {
