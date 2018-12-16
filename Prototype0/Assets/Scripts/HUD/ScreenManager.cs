@@ -151,13 +151,18 @@ public class ScreenManager : MonoBehaviour {
     }
 
 
-    public void ShowFinishLevel()
+    public void ShowFinishLevel(int coinsCollected, float elapsedTime)
     {
         foreach (BaseClassScreen screen in screens)
         {
             if (screen.ScreenId == "Levelcompleted_Screen")
             {
                 screen.OpenWindow();
+                GameOverScreen gameOverScreen = (GameOverScreen)screen;
+                if(gameOverScreen != null)
+                {
+                    gameOverScreen.SetStats(coinsCollected, elapsedTime);
+                }
             }
             else
             {

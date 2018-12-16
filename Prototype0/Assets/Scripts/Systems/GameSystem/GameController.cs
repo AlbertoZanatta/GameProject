@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
 
     int maxLives = 3;
     int lives = 5;
+    float elapsedTime = 0;
 
   
     int coinsCollected;
@@ -63,6 +64,7 @@ public class GameController : MonoBehaviour {
             }
             
         }
+        elapsedTime += Time.deltaTime;
     }
 
     private void PauseGame()
@@ -82,6 +84,10 @@ public class GameController : MonoBehaviour {
         }
         else
         {
+            coinsCollected = 0;
+            points = 0;
+            elapsedTime = 0;
+            pointsText.text = 0.ToString();
             PlayerController.Instance.inventory.ResetInventory(new List<ItemStack>());
             PlayerController.Instance.Health.Refill();
 
@@ -152,7 +158,7 @@ public class GameController : MonoBehaviour {
 
     public void FinishLevel()
     {
-        ScreenManager.instance.ShowFinishLevel();  
+        ScreenManager.instance.ShowFinishLevel(coinsCollected, elapsedTime);  
         SoundManager.instance.levelComplete("start");
     }
 

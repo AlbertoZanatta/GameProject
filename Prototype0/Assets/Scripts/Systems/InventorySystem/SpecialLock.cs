@@ -12,7 +12,7 @@ public abstract class SpecialLock : MonoBehaviour
     [SerializeField] private string noItemText;
     [SerializeField] private string requestItemText;
     [SerializeField] private string agreedItemText;
-    protected bool open = false;
+    [SerializeField] protected bool open = false;
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {

@@ -6,26 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class GameOverScreen : BaseClassScreen {
 
-    public Text leftStats;
-    public Text rightStats;
-    public Text leftValues;
-    public Text rightValues;
-    public Text score;
-    public int numOfStats = 6;
-    public int statsOnRows = 3;
-
-    private int currentStats = 0;
+    public Text coinsCollected;
+    public Text elapsedTime;
 
     public void ResetStatValues()
     {
+        elapsedTime.text = 0.ToString();
+        coinsCollected.text = 0.ToString(); 
     }
-
-    public void PrepareStats(Text stats, Text values)
+    
+    public void SetStats(int coinsCollected, float elapsedTime)
     {
-    }
+        int minutes = (int)(elapsedTime / 60f);
+        int seconds = (int)(elapsedTime % 60f);
+        int mseconds = (int)((elapsedTime * 1000) % 1000 );
+        this.elapsedTime.text = minutes.ToString() + " min : " + seconds.ToString() + " s : " + mseconds.ToString();
 
-    public void GenerateStats()
-    {
+        this.coinsCollected.text = coinsCollected.ToString();
+
+
     }
 
     public override void OpenWindow()
@@ -36,18 +35,15 @@ public class GameOverScreen : BaseClassScreen {
 
     public override void CloseWindow()
     {
+        ResetStatValues();
         base.CloseWindow();
-        currentStats = 0;
+       
     }
 
     public void OnContinue()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
-    }
-
-    private void Update()
-    {
     }
 
 }
