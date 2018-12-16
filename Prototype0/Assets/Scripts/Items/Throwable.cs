@@ -59,6 +59,10 @@ public class Throwable : MonoBehaviour{
                 damageable.Hit(weapon);
                 Destroy(gameObject);
             }
+            else if(collision.gameObject.CompareTag("Ground"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

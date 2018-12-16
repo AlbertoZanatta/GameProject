@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakableIceBlock : MonoBehaviour {
+public class BreakableIceBlock : MonoBehaviour, Damageable {
     public Sprite[] brokenSteps;
     [SerializeField] private int healthPoints;
 
@@ -27,12 +27,12 @@ public class BreakableIceBlock : MonoBehaviour {
         if(timeElapsed >= timeToDamage)
         {
             timeElapsed = 0;
-            Hit();
+            Hit(new Weapon(1, 0, WeaponType.Trap));
         }
     }
-    public void Hit()
+    public void Hit(Weapon weapon)
     {
-        currentHealthPoints--;
+        currentHealthPoints -= weapon.physical;
         if (currentHealthPoints <= 0)
         {
            
