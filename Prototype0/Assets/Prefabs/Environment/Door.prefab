@@ -334,7 +334,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5b54be0f3c9fe7c4593f7b5d251a4a57, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -546,7 +546,7 @@ TextMesh:
   m_FontSize: 20
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 5b54be0f3c9fe7c4593f7b5d251a4a57, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -566,6 +566,7 @@ MonoBehaviour:
   noItemText: You need a key. Ask the enemies for it
   requestItemText: Do you want to use your key for this door?
   agreedItemText: The door is now open!
+  open: 0
   playerDistance: 0
   doorColumns:
   - {fileID: 114603500654286522}
@@ -609,7 +610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd80cd9bd4bc9e44828f8f4b897b4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 114255171432654224}
 --- !u!212 &212293557430468612
 SpriteRenderer:
   m_ObjectHideFlags: 1

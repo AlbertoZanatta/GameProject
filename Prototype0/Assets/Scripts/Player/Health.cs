@@ -12,6 +12,8 @@ public class Health : MonoBehaviour{
     public void ChangeHealth(int delta)
     {
         healthPoints += delta;
+        if (healthPoints > maxHealthPoints)
+            healthPoints = maxHealthPoints;
         if(healthChange != null)
         {
             healthChange(this, new HealthEventArgs(healthPoints));
@@ -31,6 +33,11 @@ public class Health : MonoBehaviour{
     public int CurrentHealth
     {
         get { return healthPoints; }
+    }
+
+    public bool IsMax()
+    {
+        return CurrentHealth == maxHealthPoints;
     }
 
     public void Refill()

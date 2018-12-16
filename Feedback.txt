@@ -40,35 +40,47 @@
 					
 - Getti di lava
 - Spike che scompaiono alla prima volta
-- Ice blocks not destructible
-- Color of background a bit different
+- Ice blocks not destructible ##
+- Color of background a bit different ##
 - Attack - match cooldown time with animation ##
 - Visual indication of impaired movement
-- Fewer tiles in the breakable falls
-- Check breakable ice section
-- Improve stalactites placement
+- Fewer tiles in the breakable falls ##
+- Check breakable ice section ##
+- Improve stalactites placement ##
 - Breakable turrets (?) NO
+
 - Bordi alla mappa ##
 - Button highlighted main menu (?)
-- Collectables (trigger quando cade sul terreno)
+- Collectables (trigger quando cade sul terreno)##
 - Tile (problema state machine) ##
-- Sincro : piattaforme jimping part e piattaforma dopo cascate di lava
-- Too long jump on the left of first platform allows to bypass the death line
+- Sincro : piattaforme jimping part e piattaforma dopo cascate di lava ##
+- Too long jump on the left of first platform allows to bypass the death line ##
 - GameController returns one life less ##
 - Damage from high fall? NO
 - Making final enemy in the first level bigger ##
 - Reset coins after level##
 - Redo level layout to match back-forth ##
 - Water on the go back of the first level
-- Checkpoint on the flag position
+- Checkpoint on the flag position ##
 - Move the score text position ##
 - Show score in finish level screen ##
 - Make witch drop knives
-- Fireball passing through walls
-- Player sticking to the pillars
+- Fireball passing through walls ##
+- Player sticking to the pillars ##
 - Player respawning too fast
 - Basic enemies are boring
+- Third level should be more difficult
 
+- torches lower background ##
+- health potion cap ##
+- reduce number of health potions first level (wolf!!) ##
+- Change font  tutorial ##
+- Backlevel tutorial button at the center of the screen (change font) ##
+- Level 1 back first background ##
+- Change font doors ##
+- Tile without collider (level1back) ##
+- Match layout level2back ##
+- Change trigger enemy as the viking ## 
 //THIRD PLAY SESSION
 - Color of the lavafall (does not seem to damage)
 - First tile jumping part lava level hit even while parrying ##

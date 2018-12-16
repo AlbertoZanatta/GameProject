@@ -80,6 +80,10 @@ public class Inventory : MonoBehaviour {
     {
         if(!item.isSpecial)
         {
+            if(item.itemName.Equals("HealthPotion") && PlayerController.Instance.Health.IsMax())
+            {
+                return;
+            }
             RemoveItem(item);
             if(itemUsed != null)
             {
