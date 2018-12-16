@@ -475,7 +475,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e081ca27c928c1c4b8689eaa76cc6bb3, type: 2}
+  m_Motion: {fileID: 7400000, guid: 952e013409078a242be3c4e2264c4f6c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -501,7 +501,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a08308606b3ff394fb06bc6bf23ba120, type: 2}
+  m_Motion: {fileID: 7400000, guid: 84cc23f425f98794fbb558913dbf12e8, type: 2}
   m_Tag: jump_animation
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -527,7 +527,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: fc03625c53dae0347ab20c2832a99be4, type: 2}
+  m_Motion: {fileID: 7400000, guid: 993d4ee22d1ef774398e16b531db8e23, type: 2}
   m_Tag: fall_animation
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -583,7 +583,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9126e1ae82395294582a3920c0596341, type: 2}
+  m_Motion: {fileID: 7400000, guid: 61a6225e81b538845bbb0eef3de10efb, type: 2}
   m_Tag: walk_animation
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -610,7 +610,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: fa778e380a58d9c4c87770aa8fccc263, type: 2}
+  m_Motion: {fileID: 7400000, guid: afbac3dd5037af74da51f1f15690a460, type: 2}
   m_Tag: parry_animation
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -637,7 +637,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0e85f916e4c956541838cf440a336f31, type: 2}
+  m_Motion: {fileID: 7400000, guid: 1f73def98f9794143923e9c3117e63e5, type: 2}
   m_Tag: attack_animation
   m_SpeedParameter: 
   m_MirrorParameter: 

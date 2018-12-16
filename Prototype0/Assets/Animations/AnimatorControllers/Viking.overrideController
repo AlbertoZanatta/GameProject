@@ -8,8 +8,6 @@ AnimatorOverrideController:
   m_Name: Viking
   m_Controller: {fileID: 9100000, guid: 6fa19d6414acc5041bb58f0f5f9798c5, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: a07718134e3b3cf47aa6cbdbed73d5ea, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: e081ca27c928c1c4b8689eaa76cc6bb3, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: fa778e380a58d9c4c87770aa8fccc263, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: fa778e380a58d9c4c87770aa8fccc263, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 9126e1ae82395294582a3920c0596341, type: 2}
@@ -20,3 +18,5 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: fc03625c53dae0347ab20c2832a99be4, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: a08308606b3ff394fb06bc6bf23ba120, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: a08308606b3ff394fb06bc6bf23ba120, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e081ca27c928c1c4b8689eaa76cc6bb3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e081ca27c928c1c4b8689eaa76cc6bb3, type: 2}

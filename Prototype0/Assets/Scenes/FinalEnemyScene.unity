@@ -4435,7 +4435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenId: ButtonInstructions_Screen
-  OptionOne: {fileID: 0}
+  firstButton: {fileID: 0}
 --- !u!1 &1006220228
 GameObject:
   m_ObjectHideFlags: 0
@@ -4467,7 +4467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenId: Pause_Screen
-  OptionOne: {fileID: 0}
+  firstButton: {fileID: 0}
 --- !u!114 &1006220230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5418,7 +5418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenId: Gameover_Screen
-  OptionOne: {fileID: 1278969960}
+  firstButton: {fileID: 0}
 --- !u!114 &1278969962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6087,7 +6087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenId: HUD_Screen
-  OptionOne: {fileID: 0}
+  firstButton: {fileID: 0}
 --- !u!1 &1361670290
 GameObject:
   m_ObjectHideFlags: 0
@@ -7948,7 +7948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenId: Inventory_Screen
-  OptionOne: {fileID: 0}
+  firstButton: {fileID: 0}
 --- !u!114 &1737089298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8381,8 +8381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenId: Intro_Screen
-  OptionOne: {fileID: 1331362334}
-  continueButton: {fileID: 1480255203}
+  firstButton: {fileID: 0}
 --- !u!224 &1846538721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8473,14 +8472,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenId: Levelcompleted_Screen
-  OptionOne: {fileID: 1239823395}
-  leftStats: {fileID: 0}
-  rightStats: {fileID: 0}
-  leftValues: {fileID: 0}
-  rightValues: {fileID: 0}
-  score: {fileID: 0}
-  numOfStats: 6
-  statsOnRows: 3
+  firstButton: {fileID: 0}
+  coinsCollected: {fileID: 0}
+  elapsedTime: {fileID: 0}
 --- !u!224 &1870613319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8569,11 +8563,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b86dde4c8e22e34ab01daa45a1a9589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 308583624}
+  livesText: {fileID: 0}
+  pointsText: {fileID: 0}
   player: {fileID: 0}
   hasFlag: 0
   facingRight: 1
   levelForward: 0
+  pointsForLife: 10
 --- !u!114 &1873913412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8601,10 +8597,12 @@ MonoBehaviour:
   firstWaterfall: 15
   secondWaterfall: 7
   maxWaterfalls: 9
+  inCave: 0
   flameDist: 3
   creakingsDist: 1.5
   maxTorches: 7
   coinTimeFrame: 2
+  collectItemDuration: 50
   caveDrums: 35
 --- !u!114 &1873913414
 MonoBehaviour:

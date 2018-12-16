@@ -14,14 +14,6 @@ public class HighlightedButton : MonoBehaviour {
             button.Select();
         }
     }
-    
-    private void OnEnable()
-    {
-        Button button = gameObject.GetComponent<Button>();
-        if (button != null)
-        {
-            button.Select();
-        }
-    }
+ 
 }
 
