@@ -64,6 +64,10 @@
 - Move the score text position ##
 - Show score in finish level screen ##
 - Make witch drop knives
+- Fireball passing through walls
+- Player sticking to the pillars
+- Player respawning too fast
+- Basic enemies are boring
 
 //THIRD PLAY SESSION
 - Color of the lavafall (does not seem to damage)
