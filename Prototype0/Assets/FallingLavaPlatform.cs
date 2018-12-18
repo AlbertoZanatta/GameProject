@@ -17,6 +17,7 @@ public class FallingLavaPlatform : MonoBehaviour {
         {
             if(transform.position == desiredPosition)
             {
+
                 gameObject.SetActive(false);
             }
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, speed * Time.deltaTime);
@@ -29,5 +30,10 @@ public class FallingLavaPlatform : MonoBehaviour {
         {
             move = true;
         }
+    }
+
+    public void Reset()
+    {
+        move = false;
     }
 }
